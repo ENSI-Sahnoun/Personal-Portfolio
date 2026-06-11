@@ -475,7 +475,7 @@ collections:
               - { label: Highlight Current Menu, name: highlightCurrentMenuArea, widget: boolean, default: true, required: false }
               - { label: Smart TOC, name: smartTOC, widget: boolean, default: true, required: false }
               - { label: Smart TOC Hide Unfocused, name: smartTOCHideUnfocusedChildren, widget: boolean, default: true, required: false }
-              - { label: Default Background Image, name: defaultBackgroundImage, widget: image, required: false }
+              - { label: Default Background Image, name: defaultBackgroundImage, widget: file, required: false, hint: 'Image or video for article/list hero backgrounds' }
               - { label: Default Featured Image, name: defaultFeaturedImage, widget: image, required: false }
               - { label: Default Social Image, name: defaultSocialImage, widget: image, required: false }
 
@@ -662,7 +662,7 @@ collections:
             required: false
             fields:
               - { label: Layout, name: layout, widget: select, options: ['page', 'profile', 'hero', 'card', 'background', 'custom'], default: 'profile', required: false }
-              - { label: Homepage Image, name: homepageImage, widget: image, required: false }
+              - { label: Homepage Image, name: homepageImage, widget: file, required: false, hint: 'Upload an image or video (MP4/WebM recommended for animation)' }
               - { label: Show Recent, name: showRecent, widget: boolean, default: true, required: false }
               - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5, required: false }
               - { label: Card View, name: cardView, widget: boolean, required: false }

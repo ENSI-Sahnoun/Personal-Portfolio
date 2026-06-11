@@ -1,17 +1,17 @@
 disableImageOptimization = false
-backgroundImageWidth = 2560
 defaultAppearance = "dark"
 enableCodeCopy = false
 autoSwitchAppearance = true
 mainSections = ["writeups", "blog", "achievements", "ctfs", "projects"]
 disableTextInHeader = false
-colorScheme = "avocado"
+colorScheme = "congo"
 enableSearch = true
 fingerprintAlgorithm = "sha512"
 hotlinkFeatureImage = false
 giteaDefaultServer = "https://git.fsfe.org"
 disableImageOptimizationMD = false
 forgejoDefaultServer = "https://v11.next.forgejo.org"
+backgroundImageWidth = 2560
 enableA11y = false
 replyByEmail = false
 enableStructuredBreadcrumbs = false
@@ -30,6 +30,8 @@ showTermCount = false
 [advertisement]
 
 [firebase]
+
+[verification]
 
 [general]
 enableSearch = true
@@ -75,7 +77,7 @@ showRecentItems = 5
 showMoreLink = true
 cardView = true
 cardViewScreenWidth = true
-homepageImage = "img/chainsaw-man-pixel-art.3840x2160.mp4"
+homepageImage = "img/falling-leaves-in-the-city.1920x1080.mp4"
 
 [buymeacoffee]
 
@@ -127,8 +129,6 @@ layoutBackgroundBlur = true
 showLikes = false
 
 [fathomAnalytics]
-
-[verification]
 
 [footer]
 showMenu = true
