@@ -23,4 +23,5 @@ I'm incredibly proud of team TEZ for securing 2nd place at the recent *CyberQues
 
 Every CTF has its own distinct flavor, and CyberQuest really forced us to adapt our strategy on the fly. We faced some incredibly unique artifacts and highly sophisticated challenge designs that required a ton of collaboration, heavy deep-dives, and creative script-writing to pull the flags.
 
-*Missing 1st place by just a hair always provides the best learning opportunities.*
+*Missing 1st place by just a hair always provides the best learning opportunities.*\
+test
