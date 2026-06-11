@@ -1,7 +1,7 @@
 #!/bin/bash
 trap "kill 0" EXIT
-echo "=== Starting decap-server ==="
-npx decap-server &
+echo "=== Starting local-server (no git) ==="
+node local-server.js &
 sleep 1
 echo "=== Starting push-server ==="
 node push-server.js &

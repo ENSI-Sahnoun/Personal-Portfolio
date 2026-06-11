@@ -1,7 +1,6 @@
-local_backend: true
-
 backend:
-  name: git-gateway
+  name: proxy
+  proxy_url: http://localhost:8083/api/v1
   branch: main
 
 media_folder: assets/img

@@ -4,32 +4,93 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager</title>
+  <style>
+    #cms-push-btn {
+      position:fixed;bottom:20px;right:20px;z-index:9999;
+      padding:10px 20px;background:#4a5568;color:#fff;
+      border:none;border-radius:8px;cursor:pointer;font-size:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.3);
+    }
+    #cms-push-btn:hover { background:#5a6578; }
+    #cms-push-btn:disabled { opacity:.6;cursor:not-allowed; }
+    #cms-push-btn.pushing { background:#2d3748; }
+    #cms-push-btn.success { background:#2ecc71; }
+    #cms-push-btn.error { background:#e74c3c; }
+
+    #cms-status {
+      position:fixed;bottom:20px;left:20px;z-index:9999;
+      font:12px/1.4 system-ui,sans-serif;display:flex;align-items:center;gap:6px;
+      background:rgba(26,26,46,.85);color:#e0e0e0;padding:6px 10px;
+      border-radius:6px;cursor:pointer;max-width:40vw;
+    }
+    #cms-status .dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+    #cms-status .dot.green { background:#2ecc71; }
+    #cms-status .dot.yellow { background:#f1c40f; }
+    #cms-status .dot.red { background:#e74c3c; }
+    #cms-status .clean { color:#2ecc71; }
+    #cms-status .changed { color:#f1c40f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px; }
+    #cms-status .changed:hover { overflow:visible;white-space:normal;word-break:break-all; }
+  </style>
 </head>
 <body>
+  <div id="cms-status" onclick="refreshStatus()">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-git"></span>
+  </div>
+  <button id="cms-push-btn" onclick="pushToGitHub()">Push to GitHub</button>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
   <script>
-    function injectPushButton() {
-      var btn = document.createElement("button");
-      btn.textContent = "Push to GitHub";
-      btn.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:9999;padding:10px 20px;background:#4a5568;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.3)";
-      btn.onclick = function() {
-        btn.textContent = "Pushing...";
-        btn.disabled = true;
-        fetch("http://localhost:8082/push").then(function(r) { return r.text(); }).then(function(m) {
-          btn.textContent = "✓ " + m;
-          setTimeout(function() { btn.textContent = "Push to GitHub"; btn.disabled = false; }, 2000);
-        }).catch(function() {
-          btn.textContent = "✗ Failed (server running?)";
-          setTimeout(function() { btn.textContent = "Push to GitHub"; btn.disabled = false; }, 3000);
-        });
-      };
-      document.body.appendChild(btn);
+    var STATUS_URL = "http://localhost:8082/status";
+    var PUSH_URL = "http://localhost:8082/push";
+
+    function qs(id) { return document.getElementById(id); }
+
+    function refreshStatus() {
+      var dot = qs("status-dot"), git = qs("status-git");
+      dot.className = "dot yellow";
+      git.textContent = "checking...";
+
+      fetch(STATUS_URL).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.running) {
+          dot.className = "dot " + (data.dirty ? "yellow" : "green");
+          if (data.dirty && data.files.length > 0) {
+            git.innerHTML = '<span class="changed">\u2716 ' + data.files.length + ' uncommitted</span>';
+            git.title = data.files.map(function(f) { return f.path; }).join("\n");
+          } else {
+            git.innerHTML = '<span class="clean">\u2714 clean</span>';
+            git.title = "";
+          }
+        } else {
+          dot.className = "dot red";
+          git.textContent = "offline";
+          git.title = "";
+        }
+      }).catch(function() {
+        dot.className = "dot red";
+        git.textContent = "offline";
+        git.title = "";
+      });
     }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", injectPushButton);
-    } else {
-      injectPushButton();
+
+    function pushToGitHub() {
+      var btn = qs("cms-push-btn");
+      btn.className = "pushing";
+      btn.disabled = true;
+      btn.textContent = "Pushing...";
+      fetch(PUSH_URL).then(function(r) { return r.text(); }).then(function(m) {
+        btn.className = "success";
+        btn.textContent = "\u2713 " + m;
+        refreshStatus();
+        setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 2000);
+      }).catch(function() {
+        btn.className = "error";
+        btn.textContent = "\u2716 Failed (server running?)";
+        setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 3000);
+      });
     }
+
+    refreshStatus();
+    setInterval(refreshStatus, 10000);
   </script>
 </body>
 </html>
