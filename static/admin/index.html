@@ -41,6 +41,42 @@
     #cms-status .clean { color:#2ecc71; }
     #cms-status .changed { color:#f1c40f;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px; }
     #cms-status .changed:hover { overflow:visible;white-space:normal;word-break:break-all; }
+
+    .cms-overlay {
+      position:fixed;inset:0;z-index:10000;
+      background:rgba(0,0,0,.6);display:flex;
+      align-items:center;justify-content:center;
+    }
+    .cms-dialog {
+      background:#1a1a2e;color:#e0e0e0;padding:24px;
+      border-radius:12px;min-width:360px;max-width:500px;
+      max-height:80vh;overflow-y:auto;font:14px/1.5 system-ui,sans-serif;
+      box-shadow:0 8px 32px rgba(0,0,0,.5);
+    }
+    .cms-dialog h3 { margin:0 0 12px;font-size:16px;color:#fff; }
+    .cms-dialog label {
+      display:flex;align-items:center;gap:8px;
+      padding:6px 8px;border-radius:6px;cursor:pointer;
+    }
+    .cms-dialog label:hover { background:rgba(255,255,255,.05); }
+    .cms-dialog input[type=checkbox] { accent-color:#6c5ce7; }
+    .cms-dialog .actions {
+      display:flex;gap:8px;justify-content:flex-end;margin-top:16px;
+    }
+    .cms-dialog .actions button {
+      padding:8px 16px;border:none;border-radius:6px;
+      cursor:pointer;font-size:13px;
+    }
+    .cms-dialog .actions .cancel { background:#4a5568;color:#fff; }
+    .cms-dialog .actions .delete { background:#e74c3c;color:#fff; }
+    .cms-dialog .actions .delete:disabled { opacity:.5;cursor:not-allowed; }
+    .cms-dialog .empty-msg { color:#888;text-align:center;padding:20px 0; }
+    .cms-dialog .select-all {
+      padding:4px 8px;font-size:12px;background:transparent;
+      color:#6c5ce7;border:1px solid #6c5ce7;border-radius:4px;cursor:pointer;
+      margin-bottom:8px;
+    }
+    .cms-dialog .select-all:hover { background:#6c5ce7;color:#fff; }
   </style>
 </head>
 <body>
@@ -49,11 +85,13 @@
     <span id="status-git"></span>
   </div>
   <button id="cms-push-btn" onclick="pushToGitHub()">Push to GitHub</button>
-  <button id="cms-clean-btn" onclick="cleanEmptyDirs()">Clean empty folders</button>
+  <button id="cms-clean-btn" onclick="scanEmpty()">Clean empty folders</button>
+  <div id="cms-overlay-container"></div>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
   <script>
     var STATUS_URL = "http://localhost:8082/status";
     var PUSH_URL = "http://localhost:8082/push";
+    var CLEAN_URL = "http://localhost:8082/clean-empty";
 
     function qs(id) { return document.getElementById(id); }
 
@@ -106,25 +144,66 @@
       });
     }
 
-    function cleanEmptyDirs() {
+    function scanEmpty() {
       var btn = qs("cms-clean-btn");
       btn.className = "working";
       btn.disabled = true;
       btn.textContent = "Scanning...";
-      fetch("http://localhost:8082/clean").then(function(r) { return r.json(); }).then(function(d) {
-        if (d.removed > 0) {
-          btn.className = "success";
-          btn.textContent = "\u2713 Removed " + d.removed + " empty folder" + (d.removed > 1 ? "s" : "");
-          refreshStatus();
-        } else {
-          btn.className = "success";
-          btn.textContent = "\u2713 No empty folders";
-        }
-        setTimeout(function() { btn.className = ""; btn.textContent = "Clean empty folders"; btn.disabled = false; }, 4000);
-      }).catch(function(e) {
+      fetch(CLEAN_URL).then(function(r) { return r.json(); }).then(function(d) {
+        btn.className = "";
+        btn.disabled = false;
+        btn.textContent = "Clean empty folders";
+        showDialog(d.empty || []);
+      }).catch(function() {
         btn.className = "error";
         btn.textContent = "\u2716 Failed";
         setTimeout(function() { btn.className = ""; btn.textContent = "Clean empty folders"; btn.disabled = false; }, 4000);
+      });
+    }
+
+    function showDialog(emptyDirs) {
+      var container = qs("cms-overlay-container");
+      if (emptyDirs.length === 0) {
+        container.innerHTML = '<div class="cms-overlay"><div class="cms-dialog"><h3>Clean empty folders</h3><div class="empty-msg">No empty folders found</div><div class="actions"><button class="cancel" onclick="closeDialog()">OK</button></div></div></div>';
+        return;
+      }
+      var items = emptyDirs.map(function(p, i) {
+        return '<label><input type="checkbox" class="cms-folder-cb" value="' + p + '" checked> ' + p + '</label>';
+      }).join("");
+      container.innerHTML = '<div class="cms-overlay"><div class="cms-dialog"><h3>Select folders to delete</h3><button class="select-all" id="cms-select-all" onclick="toggleAll()">Toggle all</button>' + items + '<div class="actions"><button class="cancel" onclick="closeDialog()">Cancel</button><button class="delete" id="cms-delete-btn" onclick="deleteSelected()">Delete selected</button></div></div></div>';
+    }
+
+    function toggleAll() {
+      var cbs = document.querySelectorAll(".cms-folder-cb");
+      var checked = Array.from(cbs).every(function(c) { return c.checked; });
+      cbs.forEach(function(c) { c.checked = !checked; });
+    }
+
+    function closeDialog() {
+      qs("cms-overlay-container").innerHTML = "";
+    }
+
+    function deleteSelected() {
+      var cbs = document.querySelectorAll(".cms-folder-cb:checked");
+      var paths = Array.from(cbs).map(function(c) { return c.value; });
+      if (paths.length === 0) return;
+      var btn = qs("cms-delete-btn");
+      btn.disabled = true;
+      btn.textContent = "Deleting...";
+      fetch(CLEAN_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ paths: paths }),
+      }).then(function(r) { return r.json(); }).then(function(d) {
+        closeDialog();
+        var cleanBtn = qs("cms-clean-btn");
+        cleanBtn.className = "success";
+        cleanBtn.textContent = "\u2713 Deleted " + d.removed + " folder" + (d.removed > 1 ? "s" : "");
+        refreshStatus();
+        setTimeout(function() { cleanBtn.className = ""; cleanBtn.textContent = "Clean empty folders"; }, 4000);
+      }).catch(function() {
+        btn.disabled = false;
+        btn.textContent = "Delete selected";
       });
     }
 

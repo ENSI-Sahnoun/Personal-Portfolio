@@ -7,7 +7,7 @@ const START_TIME = Date.now();
 
 http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
@@ -15,14 +15,14 @@ http.createServer((req, res) => {
     return;
   }
 
-  if (req.url === "/clean" && req.method === "GET") {
+  if (req.url === "/clean-empty" && req.method === "GET") {
     console.log("[clean] scanning for empty directories");
     try {
       const fs = require("fs");
       const pathModule = require("path");
-      const removed = [];
+      const empty = [];
 
-      function removeEmptyDirs(dir) {
+      function findEmpty(dir, rel) {
         let entries;
         try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { return false; }
         const subdirs = entries.filter(e => e.isDirectory());
@@ -31,26 +31,48 @@ http.createServer((req, res) => {
         let allEmpty = true;
         for (const d of subdirs) {
           const full = pathModule.join(dir, d.name);
-          if (removeEmptyDirs(full)) {
-            try { fs.rmdirSync(full); removed.push(full); } catch {}
-          } else {
-            allEmpty = false;
-          }
+          const childRel = rel ? rel + "/" + d.name : d.name;
+          if (!findEmpty(full, childRel)) allEmpty = false;
         }
         if (allEmpty && subdirs.length > 0) {
-          try { fs.rmdirSync(dir); removed.push(dir); } catch {}
+          empty.push({ path: rel, abs: dir });
+        }
+        if (subdirs.length === 0) {
+          empty.push({ path: rel, abs: dir });
         }
         return allEmpty;
       }
 
-      removeEmptyDirs(pathModule.join(repo, "content"));
+      findEmpty(pathModule.join(repo, "content"), "content");
 
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ removed: removed.length, paths: removed }));
+      res.end(JSON.stringify({ empty: empty.map(e => e.path) }));
     } catch (e) {
       res.statusCode = 500;
       res.end(JSON.stringify({ error: e.message }));
     }
+    return;
+  }
+
+  if (req.url === "/clean-empty" && req.method === "POST") {
+    let body = [];
+    req.on("data", c => body.push(c));
+    req.on("end", () => {
+      try {
+        const fs = require("fs");
+        const { paths } = JSON.parse(Buffer.concat(body).toString());
+        const removed = [];
+        for (const p of paths) {
+          const full = pathModule.join(repo, p);
+          try { fs.rmdirSync(full); removed.push(p); } catch {}
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify({ removed: removed.length, paths: removed }));
+      } catch (e) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
     return;
   }
 
