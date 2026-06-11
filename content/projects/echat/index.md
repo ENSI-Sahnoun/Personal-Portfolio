@@ -23,4 +23,4 @@ Designed as an educational project for the C Programming course at **ENSI**, it 
 
 *[`Source Code`](https://github.com/ENSI-Sahnoun/eChat)*
 
-![Preview](feature-echat.png)
+![Preview]()
