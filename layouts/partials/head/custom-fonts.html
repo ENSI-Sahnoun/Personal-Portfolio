@@ -9,30 +9,24 @@
 {{- if or $fontBodyFile $fontHeadingFile }}
 <style>
   {{- if $fontBodyFile }}
-    {{- $clean := trim $fontBodyFile "/" }}
-    {{- $path := cond (hasPrefix $clean "fonts/") $clean (path.Join "fonts" $clean) }}
-    {{- with resources.Get $path }}
-      {{- $ext := lower (path.Ext .)}}
-      {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+    {{- $path := trim $fontBodyFile "/" }}
+    {{- $ext := lower (path.Ext $path) }}
+    {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
 @font-face {
   font-family: 'BodyFont';
-  src: url('{{ .RelPermalink }}') format('{{ $format }}');
+  src: url('/{{ $path }}') format('{{ $format }}');
   font-display: swap;
 }
-    {{- end }}
   {{- end }}
   {{- if $fontHeadingFile }}
-    {{- $clean := trim $fontHeadingFile "/" }}
-    {{- $path := cond (hasPrefix $clean "fonts/") $clean (path.Join "fonts" $clean) }}
-    {{- with resources.Get $path }}
-      {{- $ext := lower (path.Ext .)}}
-      {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+    {{- $path := trim $fontHeadingFile "/" }}
+    {{- $ext := lower (path.Ext $path) }}
+    {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
 @font-face {
   font-family: 'HeadingFont';
-  src: url('{{ .RelPermalink }}') format('{{ $format }}');
+  src: url('/{{ $path }}') format('{{ $format }}');
   font-display: swap;
 }
-    {{- end }}
   {{- end }}
 </style>
 {{- end }}

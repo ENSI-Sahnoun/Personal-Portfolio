@@ -643,14 +643,14 @@ collections:
                 name: fontBodyFile
                 widget: file
                 required: false
-                media_folder: '/assets/fonts'
+                media_folder: '/static/fonts'
                 public_folder: '/fonts'
                 hint: 'Upload .woff2/.woff/.ttf/.otf font file for body. Set Body Font Family to match the font name.'
               - label: Heading Font File
                 name: fontHeadingFile
                 widget: file
                 required: false
-                media_folder: '/assets/fonts'
+                media_folder: '/static/fonts'
                 public_folder: '/fonts'
                 hint: 'Upload .woff2/.woff/.ttf/.otf font file for headings. Set Heading Font Family to match the font name.'
           - label: Header
