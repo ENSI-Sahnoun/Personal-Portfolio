@@ -9,7 +9,8 @@
 {{- if or $fontBodyFile $fontHeadingFile }}
 <style>
   {{- if $fontBodyFile }}
-    {{- $path := cond (hasPrefix $fontBodyFile "fonts/") $fontBodyFile (path.Join "fonts" $fontBodyFile) }}
+    {{- $clean := trim $fontBodyFile "/" }}
+    {{- $path := cond (hasPrefix $clean "fonts/") $clean (path.Join "fonts" $clean) }}
     {{- with resources.Get $path }}
       {{- $ext := lower (path.Ext .)}}
       {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
@@ -21,7 +22,8 @@
     {{- end }}
   {{- end }}
   {{- if $fontHeadingFile }}
-    {{- $path := cond (hasPrefix $fontHeadingFile "fonts/") $fontHeadingFile (path.Join "fonts" $fontHeadingFile) }}
+    {{- $clean := trim $fontHeadingFile "/" }}
+    {{- $path := cond (hasPrefix $clean "fonts/") $clean (path.Join "fonts" $clean) }}
     {{- with resources.Get $path }}
       {{- $ext := lower (path.Ext .)}}
       {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
