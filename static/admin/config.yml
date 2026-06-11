@@ -460,7 +460,7 @@ collections:
             required: false
             collapsed: true
             fields:
-              - { label: Enable Search, name: enableSearch, widget: boolean, default: true }
+              - { label: Enable Search, name: enableSearch, widget: boolean, default: true, required: false }
               - { label: Enable Code Copy, name: enableCodeCopy, widget: boolean, required: false }
               - { label: Enable Accessibility, name: enableA11y, widget: boolean, required: false }
               - { label: Enable Structured Breadcrumbs, name: enableStructuredBreadcrumbs, widget: boolean, required: false }
@@ -468,12 +468,12 @@ collections:
               - { label: Disable Image Optimization, name: disableImageOptimization, widget: boolean, required: false }
               - { label: Disable Text In Header, name: disableTextInHeader, widget: boolean, required: false }
               - { label: Hotlink Feature Image, name: hotlinkFeatureImage, widget: boolean, required: false }
-              - { label: Fingerprint Algorithm, name: fingerprintAlgorithm, widget: select, options: ['sha512', 'sha384', 'sha256'], default: 'sha512' }
+              - { label: Fingerprint Algorithm, name: fingerprintAlgorithm, widget: select, options: ['sha512', 'sha384', 'sha256'], default: 'sha512', required: false }
               - { label: Thumbnail Aspect Ratio, name: thumbnailAspectRatio, widget: string, required: false, hint: 'e.g. "1.5", "1.0"' }
               - { label: Image Position, name: imagePosition, widget: string, required: false, hint: 'e.g. "50% 50%"' }
-              - { label: Highlight Current Menu, name: highlightCurrentMenuArea, widget: boolean, default: true }
-              - { label: Smart TOC, name: smartTOC, widget: boolean, default: true }
-              - { label: Smart TOC Hide Unfocused, name: smartTOCHideUnfocusedChildren, widget: boolean, default: true }
+              - { label: Highlight Current Menu, name: highlightCurrentMenuArea, widget: boolean, default: true, required: false }
+              - { label: Smart TOC, name: smartTOC, widget: boolean, default: true, required: false }
+              - { label: Smart TOC Hide Unfocused, name: smartTOCHideUnfocusedChildren, widget: boolean, default: true, required: false }
               - { label: Default Background Image, name: defaultBackgroundImage, widget: image, required: false }
               - { label: Default Featured Image, name: defaultFeaturedImage, widget: image, required: false }
               - { label: Default Social Image, name: defaultSocialImage, widget: image, required: false }
@@ -485,33 +485,33 @@ collections:
             collapsed: true
             fields:
               - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
-              - { label: Show Date, name: showDate, widget: boolean, default: true }
+              - { label: Show Date, name: showDate, widget: boolean, default: true, required: false }
               - { label: Show Date Updated, name: showDateUpdated, widget: boolean, required: false }
               - { label: Show Date Only In Article, name: showDateOnlyInArticle, widget: boolean, required: false }
-              - { label: Show Reading Time, name: showReadingTime, widget: boolean, default: true }
-              - { label: Show Word Count, name: showWordCount, widget: boolean, default: true }
+              - { label: Show Reading Time, name: showReadingTime, widget: boolean, default: true, required: false }
+              - { label: Show Word Count, name: showWordCount, widget: boolean, default: true, required: false }
               - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
               - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
               - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
-              - { label: Show Categories, name: showCategories, widget: boolean, default: true }
-              - { label: Show Tags, name: showTags, widget: boolean, default: true }
+              - { label: Show Categories, name: showCategories, widget: boolean, default: true, required: false }
+              - { label: Show Tags, name: showTags, widget: boolean, default: true, required: false }
               - { label: Show Categories In Secondary Color, name: showCategoriesInSecondaryColor, widget: boolean, required: false }
               - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
-              - { label: Show Pagination, name: showPagination, widget: boolean, default: true }
+              - { label: Show Pagination, name: showPagination, widget: boolean, default: true, required: false }
               - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
-              - { label: Show Author, name: showAuthor, widget: boolean, default: true }
+              - { label: Show Author, name: showAuthor, widget: boolean, default: true, required: false }
               - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
-              - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, default: true }
+              - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, default: true, required: false }
               - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
               - { label: Show Comments, name: showComments, widget: boolean, required: false }
-              - { label: Show Draft Label, name: showDraftLabel, widget: boolean, default: true }
+              - { label: Show Draft Label, name: showDraftLabel, widget: boolean, default: true, required: false }
               - { label: Show Views, name: showViews, widget: boolean, required: false }
               - { label: Show Likes, name: showLikes, widget: boolean, required: false }
               - { label: Show Edit, name: showEdit, widget: boolean, required: false }
-              - { label: Edit Append Path, name: editAppendPath, widget: boolean, default: true }
+              - { label: Edit Append Path, name: editAppendPath, widget: boolean, default: true, required: false }
               - { label: Series Opened, name: seriesOpened, widget: boolean, required: false }
-              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true }
-              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true }
+              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true, required: false }
+              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true, required: false }
               - { label: External Link Force New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
 
           - label: List Defaults
@@ -531,10 +531,10 @@ collections:
               - { label: Card View, name: cardView, widget: boolean, required: false }
               - { label: Card View Screen Width, name: cardViewScreenWidth, widget: boolean, required: false }
               - { label: Order By Weight, name: orderByWeight, widget: boolean, required: false }
-              - { label: Group By Year, name: groupByYear, widget: boolean, default: true }
+              - { label: Group By Year, name: groupByYear, widget: boolean, default: true, required: false }
               - { label: Constrain Items Width, name: constrainItemsWidth, widget: boolean, required: false }
-              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true }
-              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true }
+              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true, required: false }
+              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true, required: false }
 
           - label: Taxonomy Defaults
             name: taxonomyDefaults
@@ -548,10 +548,10 @@ collections:
               - { label: Show Views, name: showViews, widget: boolean, required: false }
               - { label: Show Likes, name: showLikes, widget: boolean, required: false }
               - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
-              - { label: Show Term Count, name: showTermCount, widget: boolean, default: true }
+              - { label: Show Term Count, name: showTermCount, widget: boolean, default: true, required: false }
               - { label: Card View, name: cardView, widget: boolean, required: false }
-              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true }
-              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true }
+              - { label: Layout Background Blur, name: layoutBackgroundBlur, widget: boolean, default: true, required: false }
+              - { label: Layout Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, default: true, required: false }
 
           - label: Sitemap
             name: sitemap
@@ -567,10 +567,25 @@ collections:
             required: false
             collapsed: true
             fields:
-              - { label: Fathom Site ID, name: fathomAnalytics.site, widget: string, required: false }
-              - { label: Umami Website ID, name: umamiAnalytics.websiteid, widget: string, required: false }
-              - { label: Umami Domain, name: umamiAnalytics.domain, widget: string, required: false }
-              - { label: Seline Token, name: selineAnalytics.token, widget: string, required: false }
+              - label: Fathom
+                name: fathomAnalytics
+                widget: object
+                required: false
+                fields:
+                  - { label: Site ID, name: site, widget: string, required: false }
+              - label: Umami
+                name: umamiAnalytics
+                widget: object
+                required: false
+                fields:
+                  - { label: Website ID, name: websiteid, widget: string, required: false }
+                  - { label: Domain, name: domain, widget: string, required: false }
+              - label: Seline
+                name: selineAnalytics
+                widget: object
+                required: false
+                fields:
+                  - { label: Token, name: token, widget: string, required: false }
 
           - label: Integrations
             name: integrations
@@ -578,15 +593,30 @@ collections:
             required: false
             collapsed: true
             fields:
-              - { label: Buy Me a Coffee Identifier, name: buymeacoffee.identifier, widget: string, required: false }
-              - { label: Buy Me a Coffee Global Widget, name: buymeacoffee.globalWidget, widget: boolean, required: false }
-              - { label: Google AdSense, name: advertisement.adsense, widget: string, required: false }
-              - { label: Firebase API Key, name: firebase.apiKey, widget: string, required: false }
-              - { label: Firebase Auth Domain, name: firebase.authDomain, widget: string, required: false }
-              - { label: Firebase Project ID, name: firebase.projectId, widget: string, required: false }
-              - { label: Firebase Storage Bucket, name: firebase.storageBucket, widget: string, required: false }
-              - { label: Firebase Messaging Sender ID, name: firebase.messagingSenderId, widget: string, required: false }
-              - { label: Firebase App ID, name: firebase.appId, widget: string, required: false }
+              - label: Buy Me a Coffee
+                name: buymeacoffee
+                widget: object
+                required: false
+                fields:
+                  - { label: Identifier, name: identifier, widget: string, required: false }
+                  - { label: Global Widget, name: globalWidget, widget: boolean, required: false }
+              - label: Advertisement
+                name: advertisement
+                widget: object
+                required: false
+                fields:
+                  - { label: Google AdSense, name: adsense, widget: string, required: false }
+              - label: Firebase
+                name: firebase
+                widget: object
+                required: false
+                fields:
+                  - { label: API Key, name: apiKey, widget: string, required: false }
+                  - { label: Auth Domain, name: authDomain, widget: string, required: false }
+                  - { label: Project ID, name: projectId, widget: string, required: false }
+                  - { label: Storage Bucket, name: storageBucket, widget: string, required: false }
+                  - { label: Messaging Sender ID, name: messagingSenderId, widget: string, required: false }
+                  - { label: App ID, name: appId, widget: string, required: false }
 
           - label: Verification
             name: verification
@@ -594,11 +624,11 @@ collections:
             required: false
             collapsed: true
             fields:
-              - { label: Google, name: verification.google, widget: string, required: false }
-              - { label: Bing, name: verification.bing, widget: string, required: false }
-              - { label: Pinterest, name: verification.pinterest, widget: string, required: false }
-              - { label: Yandex, name: verification.yandex, widget: string, required: false }
-              - { label: Fediverse, name: verification.fediverse, widget: string, required: false }
+              - { label: Google Site Verification, name: google, widget: string, required: false }
+              - { label: Bing, name: bing, widget: string, required: false }
+              - { label: Pinterest, name: pinterest, widget: string, required: false }
+              - { label: Yandex, name: yandex, widget: string, required: false }
+              - { label: Fediverse, name: fediverse, widget: string, required: false }
 
           - label: Fonts
             name: fonts
@@ -613,38 +643,61 @@ collections:
             widget: object
             required: false
             fields:
-              - { label: Layout, name: layout, widget: select, options: ['basic', 'fixed', 'fixed-fill', 'fixed-gradient', 'fixed-fill-blur'], default: 'basic' }
+              - { label: Layout, name: layout, widget: select, options: ['basic', 'fixed', 'fixed-fill', 'fixed-gradient', 'fixed-fill-blur'], default: 'basic', required: false }
           - label: Footer
             name: footer
             widget: object
             required: false
             fields:
-              - { label: Show Menu, name: showMenu, widget: boolean, default: true }
-              - { label: Show Copyright, name: showCopyright, widget: boolean, default: true }
-              - { label: Show Theme Attribution, name: showThemeAttribution, widget: boolean, default: true }
-              - { label: Show Appearance Switcher, name: showAppearanceSwitcher, widget: boolean, default: true }
-              - { label: Show Scroll to Top, name: showScrollToTop, widget: boolean, default: true }
+              - { label: Show Menu, name: showMenu, widget: boolean, default: true, required: false }
+              - { label: Show Copyright, name: showCopyright, widget: boolean, default: true, required: false }
+              - { label: Show Theme Attribution, name: showThemeAttribution, widget: boolean, default: true, required: false }
+              - { label: Show Appearance Switcher, name: showAppearanceSwitcher, widget: boolean, default: true, required: false }
+              - { label: Show Scroll to Top, name: showScrollToTop, widget: boolean, default: true, required: false }
           - { label: Main Sections, name: mainSections, widget: list, required: false, hint: 'Sections shown on homepage (e.g. writeups, blog, projects)' }
           - label: Homepage
             name: homepage
             widget: object
             required: false
             fields:
-              - { label: Layout, name: layout, widget: select, options: ['page', 'profile', 'hero', 'card', 'background', 'custom'], default: 'profile' }
+              - { label: Layout, name: layout, widget: select, options: ['page', 'profile', 'hero', 'card', 'background', 'custom'], default: 'profile', required: false }
               - { label: Homepage Image, name: homepageImage, widget: image, required: false }
-              - { label: Show Recent, name: showRecent, widget: boolean, default: true }
-              - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5 }
-              - { label: Card View, name: cardView, widget: boolean }
-              - { label: Card View Full Width, name: cardViewScreenWidth, widget: boolean }
-              - { label: Show More Link, name: showMoreLink, widget: boolean }
+              - { label: Show Recent, name: showRecent, widget: boolean, default: true, required: false }
+              - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5, required: false }
+              - { label: Card View, name: cardView, widget: boolean, required: false }
+              - { label: Card View Full Width, name: cardViewScreenWidth, widget: boolean, required: false }
+              - { label: Show More Link, name: showMoreLink, widget: boolean, required: false }
               - { label: More Link Destination, name: showMoreLinkDest, widget: string, required: false }
 
       - label: Menus
         name: menus
         file: config/_default/menus.en.toml
-        format: raw
+        format: toml
         fields:
-          - { label: Content, name: body, widget: text }
+          - label: Main Menu
+            name: main
+            widget: list
+            required: false
+            hint: 'Links in the top navigation bar'
+            fields:
+              - { label: Name, name: name, widget: string, hint: 'Display text' }
+              - { label: Page Ref, name: pageRef, widget: string, required: false, hint: 'e.g. "posts", "about"' }
+              - { label: URL, name: url, widget: string, required: false, hint: 'External link (if not using pageRef)' }
+              - { label: Parent, name: parent, widget: string, required: false, hint: 'Parent menu name for nested menus' }
+              - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+              - { label: Icon, name: pre, widget: string, required: false, hint: 'Icon name (e.g. github, twitter)' }
+              - { label: Identifier, name: identifier, widget: string, required: false, hint: 'Unique ID (needed for icon-only entries)' }
+          - label: Footer Menu
+            name: footer
+            widget: list
+            required: false
+            hint: 'Links in the page footer'
+            fields:
+              - { label: Name, name: name, widget: string, hint: 'Display text' }
+              - { label: Page Ref, name: pageRef, widget: string, required: false, hint: 'e.g. "tags", "about"' }
+              - { label: URL, name: url, widget: string, required: false, hint: 'External link' }
+              - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+              - { label: Icon, name: pre, widget: string, required: false, hint: 'Icon name (e.g. github)' }
 
       - label: Site Config
         name: siteConfig

@@ -19,11 +19,38 @@ enableStructuredBreadcrumbs = false
 
 [umamiAnalytics]
 
+[taxonomyDefaults]
+layoutBackgroundBlur = false
+layoutBackgroundHeaderSpace = false
+showTermCount = false
+
 [rssnext]
 
 [advertisement]
 
 [firebase]
+
+[general]
+enableSearch = true
+enableStructuredBreadcrumbs = true
+highlightCurrentMenuArea = true
+fingerprintAlgorithm = "sha512"
+smartTOC = false
+smartTOCHideUnfocusedChildren = false
+
+[articleDefaults]
+layoutBackgroundHeaderSpace = false
+showWordCount = false
+showAuthor = false
+editAppendPath = false
+showDate = false
+showDraftLabel = false
+showTags = false
+showPagination = true
+showHeadingAnchors = false
+showCategories = false
+showReadingTime = false
+layoutBackgroundBlur = false
 
 [term]
 layoutBackgroundHeaderSpace = true
@@ -49,6 +76,11 @@ cardView = true
 cardViewScreenWidth = true
 
 [buymeacoffee]
+
+[listDefaults]
+groupByYear = false
+layoutBackgroundBlur = false
+layoutBackgroundHeaderSpace = false
 
 [taxonomy]
 layoutBackgroundHeaderSpace = true
@@ -94,14 +126,14 @@ showLikes = false
 
 [fathomAnalytics]
 
+[verification]
+
 [footer]
 showMenu = true
 showCopyright = true
-showThemeAttribution = true
+showThemeAttribution = false
 showAppearanceSwitcher = true
 showScrollToTop = true
-
-[verification]
 
 [seo]
 
