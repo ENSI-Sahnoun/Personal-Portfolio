@@ -10,13 +10,13 @@ displayName = "EN"
 isoCode = "en"
 rtl = false
 dateFormat = "2 January 2006"
-description = "test"
+description = ""
 copyright = "© TEZ - 2026"
 
 [params.author]
 name = "sah"
 imageQuality = 96
-headline = "Cybersecurity enthusiast"
+headline = "Cybersecurity is my playstation"
 bio = "ENSI Student & CTF Player"
 
 [[params.author.links]]

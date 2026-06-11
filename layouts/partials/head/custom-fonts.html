@@ -1,0 +1,16 @@
+{{- with .Site.Params.fontUrl }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{{ . }}" rel="stylesheet">
+{{- end }}
+
+{{- if or .Site.Params.fontBody .Site.Params.fontHeading }}
+<style>
+  {{- with .Site.Params.fontBody }}
+  body { font-family: {{ . | safeCSS }}; }
+  {{- end }}
+  {{- with .Site.Params.fontHeading }}
+  h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
+  {{- end }}
+</style>
+{{- end }}

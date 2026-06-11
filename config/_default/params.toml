@@ -38,15 +38,15 @@ layoutBackgroundBlur = true
 showLikes = false
 
 [header]
-layout = "basic"
+layout = "fixed-fill-blur"
 
 [homepage]
-layout = "profile"
+layout = "background"
 showRecent = true
 showRecentItems = 5
-showMoreLink = false
-cardView = false
-cardViewScreenWidth = false
+showMoreLink = true
+cardView = true
+cardViewScreenWidth = true
 
 [buymeacoffee]
 

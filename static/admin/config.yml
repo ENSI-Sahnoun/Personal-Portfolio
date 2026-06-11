@@ -435,6 +435,7 @@ collections:
             fields:
               - { label: Description, name: description, widget: text, required: false }
               - { label: Copyright, name: copyright, widget: string, required: false }
+              - { label: Header Logo, name: logo, widget: image, required: false, hint: 'Place in assets/img/, e.g. img/logo.png' }
               - label: Author
                 name: author
                 widget: object
@@ -452,6 +453,14 @@ collections:
           - { label: Color Scheme, name: colorScheme, widget: select, options: ['blowfish', 'slate', 'autumn', 'avocado', 'bloody', 'congo', 'fire', 'forest', 'github', 'marvel', 'neon', 'noir', 'one-light', 'princess', 'terminal'], default: 'slate' }
           - { label: Default Appearance, name: defaultAppearance, widget: select, options: ['light', 'dark'], default: 'light' }
           - { label: Auto Switch Appearance, name: autoSwitchAppearance, widget: boolean, default: true }
+          - label: Fonts
+            name: fonts
+            widget: object
+            required: false
+            fields:
+              - { label: Google Fonts URL, name: fontUrl, widget: string, required: false, hint: 'Full Google Fonts embed URL (e.g. https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap)' }
+              - { label: Body Font Family, name: fontBody, widget: string, required: false, hint: 'CSS font-family for body text (e.g. Inter, sans-serif)' }
+              - { label: Heading Font Family, name: fontHeading, widget: string, required: false, hint: 'CSS font-family for headings (e.g. Inter, sans-serif)' }
           - label: Header
             name: header
             widget: object
