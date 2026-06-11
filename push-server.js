@@ -15,6 +15,45 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (req.url === "/clean" && req.method === "GET") {
+    console.log("[clean] scanning for empty directories");
+    try {
+      const fs = require("fs");
+      const pathModule = require("path");
+      const removed = [];
+
+      function removeEmptyDirs(dir) {
+        let entries;
+        try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { return false; }
+        const subdirs = entries.filter(e => e.isDirectory());
+        const files = entries.filter(e => !e.isDirectory());
+        if (files.length > 0) return false;
+        let allEmpty = true;
+        for (const d of subdirs) {
+          const full = pathModule.join(dir, d.name);
+          if (removeEmptyDirs(full)) {
+            try { fs.rmdirSync(full); removed.push(full); } catch {}
+          } else {
+            allEmpty = false;
+          }
+        }
+        if (allEmpty && subdirs.length > 0) {
+          try { fs.rmdirSync(dir); removed.push(dir); } catch {}
+        }
+        return allEmpty;
+      }
+
+      removeEmptyDirs(pathModule.join(repo, "content"));
+
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ removed: removed.length, paths: removed }));
+    } catch (e) {
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
   if (req.url === "/push" && req.method === "GET") {
     console.log("[push] received push request");
     try {

@@ -14,6 +14,17 @@
     #cms-push-btn:hover { background:#5a6578; }
     #cms-push-btn:disabled { opacity:.6;cursor:not-allowed; }
     #cms-push-btn.pushing { background:#2d3748; }
+    #cms-clean-btn {
+      position:fixed;bottom:70px;right:20px;z-index:9999;
+      padding:10px 20px;background:#6c5ce7;color:#fff;
+      border:none;border-radius:8px;cursor:pointer;font-size:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.3);
+    }
+    #cms-clean-btn:hover { background:#7c6cf7; }
+    #cms-clean-btn:disabled { opacity:.6;cursor:not-allowed; }
+    #cms-clean-btn.working { background:#5a4bd1; }
+    #cms-clean-btn.success { background:#2ecc71; }
+    #cms-clean-btn.error { background:#e74c3c; }
     #cms-push-btn.success { background:#2ecc71; }
     #cms-push-btn.error { background:#e74c3c; }
 
@@ -38,6 +49,7 @@
     <span id="status-git"></span>
   </div>
   <button id="cms-push-btn" onclick="pushToGitHub()">Push to GitHub</button>
+  <button id="cms-clean-btn" onclick="cleanEmptyDirs()">Clean empty folders</button>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
   <script>
     var STATUS_URL = "http://localhost:8082/status";
@@ -91,6 +103,28 @@
         btn.className = "error";
         btn.textContent = "\u2716 " + (e.message || "Failed — server running?");
         setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 8000);
+      });
+    }
+
+    function cleanEmptyDirs() {
+      var btn = qs("cms-clean-btn");
+      btn.className = "working";
+      btn.disabled = true;
+      btn.textContent = "Scanning...";
+      fetch("http://localhost:8082/clean").then(function(r) { return r.json(); }).then(function(d) {
+        if (d.removed > 0) {
+          btn.className = "success";
+          btn.textContent = "\u2713 Removed " + d.removed + " empty folder" + (d.removed > 1 ? "s" : "");
+          refreshStatus();
+        } else {
+          btn.className = "success";
+          btn.textContent = "\u2713 No empty folders";
+        }
+        setTimeout(function() { btn.className = ""; btn.textContent = "Clean empty folders"; btn.disabled = false; }, 4000);
+      }).catch(function(e) {
+        btn.className = "error";
+        btn.textContent = "\u2716 Failed";
+        setTimeout(function() { btn.className = ""; btn.textContent = "Clean empty folders"; btn.disabled = false; }, 4000);
       });
     }
 
