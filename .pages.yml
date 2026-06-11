@@ -1,0 +1,215 @@
+media: assets/img
+
+content:
+  - name: content
+    label: Content
+    type: group
+    items:
+      - name: writeups
+        label: Writeups
+        type: collection
+        path: content/writeups
+        subfolders: true
+        filename: "{slug}/index.md"
+        exclude: ["_index.md"]
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - name: title
+            type: string
+          - name: date
+            type: datetime
+          - name: description
+            type: text
+            required: false
+          - name: tags
+            type: list
+            required: false
+          - name: categories
+            type: list
+            required: false
+          - name: weight
+            type: number
+            required: false
+          - name: draft
+            type: boolean
+            default: false
+          - name: body
+            type: rich-text
+
+      - name: blog
+        label: Blog
+        type: collection
+        path: content/blog
+        subfolders: true
+        filename: "{slug}/index.md"
+        exclude: ["_index.md"]
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - name: title
+            type: string
+          - name: date
+            type: datetime
+          - name: description
+            type: text
+            required: false
+          - name: tags
+            type: list
+            required: false
+          - name: categories
+            type: list
+            required: false
+          - name: weight
+            type: number
+            required: false
+          - name: draft
+            type: boolean
+            default: false
+          - name: body
+            type: rich-text
+
+      - name: achievements
+        label: Achievements
+        type: collection
+        path: content/achievements
+        subfolders: true
+        filename: "{slug}/index.md"
+        exclude: ["_index.md"]
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - name: title
+            type: string
+          - name: date
+            type: datetime
+          - name: description
+            type: text
+            required: false
+          - name: tags
+            type: list
+            required: false
+          - name: categories
+            type: list
+            required: false
+          - name: weight
+            type: number
+            required: false
+          - name: draft
+            type: boolean
+            default: false
+          - name: body
+            type: rich-text
+
+      - name: ctfs
+        label: CTFs
+        type: collection
+        path: content/ctfs
+        subfolders: true
+        filename: "{slug}/index.md"
+        exclude: ["_index.md"]
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - name: title
+            type: string
+          - name: date
+            type: datetime
+          - name: description
+            type: text
+            required: false
+          - name: tags
+            type: list
+            required: false
+          - name: categories
+            type: list
+            required: false
+          - name: weight
+            type: number
+            required: false
+          - name: draft
+            type: boolean
+            default: false
+          - name: body
+            type: rich-text
+
+      - name: projects
+        label: Projects
+        type: collection
+        path: content/projects
+        subfolders: true
+        filename: "{slug}/index.md"
+        exclude: ["_index.md"]
+        view:
+          fields: [title, date]
+          primary: title
+          sort: [date, title]
+          default:
+            sort: date
+            order: desc
+        fields:
+          - name: title
+            type: string
+          - name: date
+            type: datetime
+          - name: description
+            type: text
+            required: false
+          - name: tags
+            type: list
+            required: false
+          - name: categories
+            type: list
+            required: false
+          - name: weight
+            type: number
+            required: false
+          - name: draft
+            type: boolean
+            default: false
+          - name: body
+            type: rich-text
+
+  - name: pages
+    label: Pages
+    type: group
+    items:
+      - name: about
+        label: About
+        type: file
+        path: content/about/_index.md
+        fields:
+          - name: title
+            type: string
+          - name: body
+            type: rich-text
+
+      - name: resume
+        label: Resume
+        type: file
+        path: content/resume/_index.md
+        fields:
+          - name: title
+            type: string
+          - name: body
+            type: rich-text

@@ -1,0 +1,28 @@
+disabled = false
+locale = "en"
+label = "English"
+weight = 1
+title = "YourAlias"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  # logo = "img/logo.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  description = "Cybersecurity is my life, hope you enjoy my blog"
+  # copyright = "Copy, _right?_ :thinking_face:"
+
+[params.author]
+  name = "Your Name"
+  # email = "youremail@example.com"
+  # image = "img/author.jpg"
+  imageQuality = 96
+  headline = "Cybersecurity enthusiast"
+  bio = "A little bit about you"
+  links = [
+    { email = "mailto:youremail@example.com" },
+    { github = "https://github.com/username" },
+    { twitter = "https://twitter.com/username" },
+  ]
