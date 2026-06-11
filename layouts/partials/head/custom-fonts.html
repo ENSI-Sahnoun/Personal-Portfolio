@@ -4,13 +4,44 @@
 <link href="{{ . }}" rel="stylesheet">
 {{- end }}
 
+{{- $fontBodyFile := .Site.Params.fontBodyFile }}
+{{- $fontHeadingFile := .Site.Params.fontHeadingFile }}
+{{- if or $fontBodyFile $fontHeadingFile }}
+<style>
+  {{- if $fontBodyFile }}
+    {{- $path := cond (hasPrefix $fontBodyFile "fonts/") $fontBodyFile (path.Join "fonts" $fontBodyFile) }}
+    {{- with resources.Get $path }}
+      {{- $ext := lower (path.Ext .)}}
+      {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+@font-face {
+  font-family: 'BodyFont';
+  src: url('{{ .RelPermalink }}') format('{{ $format }}');
+  font-display: swap;
+}
+    {{- end }}
+  {{- end }}
+  {{- if $fontHeadingFile }}
+    {{- $path := cond (hasPrefix $fontHeadingFile "fonts/") $fontHeadingFile (path.Join "fonts" $fontHeadingFile) }}
+    {{- with resources.Get $path }}
+      {{- $ext := lower (path.Ext .)}}
+      {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+@font-face {
+  font-family: 'HeadingFont';
+  src: url('{{ .RelPermalink }}') format('{{ $format }}');
+  font-display: swap;
+}
+    {{- end }}
+  {{- end }}
+</style>
+{{- end }}
+
 {{- if or .Site.Params.fontBody .Site.Params.fontHeading }}
 <style>
   {{- with .Site.Params.fontBody }}
-  body { font-family: {{ . | safeCSS }}; }
+body { font-family: {{ . | safeCSS }}; }
   {{- end }}
   {{- with .Site.Params.fontHeading }}
-  h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
+h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
   {{- end }}
 </style>
 {{- end }}

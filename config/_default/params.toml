@@ -25,13 +25,14 @@ layoutBackgroundBlur = false
 layoutBackgroundHeaderSpace = false
 showTermCount = false
 
+[fonts]
+fontHeading = ""
+
 [rssnext]
 
 [advertisement]
 
 [firebase]
-
-[verification]
 
 [general]
 enableSearch = true
@@ -129,6 +130,8 @@ layoutBackgroundBlur = true
 showLikes = false
 
 [fathomAnalytics]
+
+[verification]
 
 [footer]
 showMenu = true
