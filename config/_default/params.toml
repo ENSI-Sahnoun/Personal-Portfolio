@@ -28,6 +28,7 @@ showTermCount = false
 [fonts]
 fontHeading = ""
 fontHeadingFile = "/fonts/moistlyvengionsdemo-regular.otf"
+fontBodyFile = "/fonts/moistlyvengionsdemo-regular.otf"
 
 [rssnext]
 
