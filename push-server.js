@@ -47,7 +47,7 @@ http.createServer((req, res) => {
       }
 
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ empty: empty.map(e => e.path) }));
+      res.end(JSON.stringify({ empty: empty }));
     } catch (e) {
       res.statusCode = 500;
       res.end(JSON.stringify({ error: e.message }));
