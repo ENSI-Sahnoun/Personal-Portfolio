@@ -7,5 +7,29 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3/dist/decap-cms.js"></script>
+  <script>
+    function injectPushButton() {
+      var btn = document.createElement("button");
+      btn.textContent = "Push to GitHub";
+      btn.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:9999;padding:10px 20px;background:#4a5568;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.3)";
+      btn.onclick = function() {
+        btn.textContent = "Pushing...";
+        btn.disabled = true;
+        fetch("http://localhost:8082/push").then(function(r) { return r.text(); }).then(function(m) {
+          btn.textContent = "✓ " + m;
+          setTimeout(function() { btn.textContent = "Push to GitHub"; btn.disabled = false; }, 2000);
+        }).catch(function() {
+          btn.textContent = "✗ Failed (server running?)";
+          setTimeout(function() { btn.textContent = "Push to GitHub"; btn.disabled = false; }, 3000);
+        });
+      };
+      document.body.appendChild(btn);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", injectPushButton);
+    } else {
+      injectPushButton();
+    }
+  </script>
 </body>
 </html>
