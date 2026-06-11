@@ -425,9 +425,24 @@ collections:
       - label: Profile
         name: profile
         file: config/_default/languages.en.toml
-        format: raw
+        format: toml
         fields:
-          - { label: Content, name: body, widget: text }
+          - { label: Site Title, name: title, widget: string }
+          - { label: Language Code, name: locale, widget: string, default: 'en' }
+          - label: Params
+            name: params
+            widget: object
+            fields:
+              - { label: Description, name: description, widget: text, required: false }
+              - { label: Copyright, name: copyright, widget: string, required: false }
+              - label: Author
+                name: author
+                widget: object
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Image, name: image, widget: image, required: false, hint: 'Place image in assets/img/' }
+                  - { label: Headline, name: headline, widget: string, required: false }
+                  - { label: Bio, name: bio, widget: text, required: false }
 
       - label: Theme
         name: theme
@@ -453,6 +468,7 @@ collections:
               - { label: Show Theme Attribution, name: showThemeAttribution, widget: boolean, default: true }
               - { label: Show Appearance Switcher, name: showAppearanceSwitcher, widget: boolean, default: true }
               - { label: Show Scroll to Top, name: showScrollToTop, widget: boolean, default: true }
+          - { label: Main Sections, name: mainSections, widget: list, required: false, hint: 'Sections shown on homepage (e.g. writeups, blog, projects)' }
           - label: Homepage
             name: homepage
             widget: object
@@ -463,4 +479,6 @@ collections:
               - { label: Show Recent, name: showRecent, widget: boolean, default: true }
               - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5 }
               - { label: Card View, name: cardView, widget: boolean }
+              - { label: Card View Full Width, name: cardViewScreenWidth, widget: boolean }
               - { label: Show More Link, name: showMoreLink, widget: boolean }
+              - { label: More Link Destination, name: showMoreLinkDest, widget: string, required: false }
