@@ -27,23 +27,24 @@ http.createServer((req, res) => {
         try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { return false; }
         const subdirs = entries.filter(e => e.isDirectory());
         const files = entries.filter(e => !e.isDirectory());
-        if (files.length > 0) return false;
-        let allEmpty = true;
         for (const d of subdirs) {
           const full = pathModule.join(dir, d.name);
-          const childRel = rel ? rel + "/" + d.name : d.name;
-          if (!findEmpty(full, childRel)) allEmpty = false;
+          const childRel = rel + "/" + d.name;
+          findEmpty(full, childRel);
         }
-        if (allEmpty && subdirs.length > 0) {
-          empty.push({ path: rel, abs: dir });
+        if (files.length === 0 && subdirs.length === 0) {
+          empty.push(rel);
         }
-        if (subdirs.length === 0) {
-          empty.push({ path: rel, abs: dir });
-        }
-        return allEmpty;
       }
 
-      findEmpty(pathModule.join(repo, "content"), "content");
+      const contentDir = pathModule.join(repo, "content");
+      const entries = fs.readdirSync(contentDir, { withFileTypes: true });
+      for (const e of entries) {
+        if (e.isDirectory()) {
+          const full = pathModule.join(contentDir, e.name);
+          findEmpty(full, "content/" + e.name);
+        }
+      }
 
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ empty: empty.map(e => e.path) }));
