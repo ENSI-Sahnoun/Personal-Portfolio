@@ -7,21 +7,6 @@ backend:
 media_folder: assets/img
 public_folder: img
 
-media_library:
-  name: default
-  config:
-    multiple: true
-    allowed_file_types:
-      - gif
-      - png
-      - jpg
-      - jpeg
-      - svg
-      - webp
-      - mp4
-      - webm
-      - mov
-
 collections:
   - name: writeups
     label: Writeups
