@@ -6,7 +6,6 @@ description: Personal CTF Competition
 weight: 0
 media:
   showHero: false
-  featureimage: 2026-06-11-235940_hyprshot.png
   heroStyle: basic
 display:
   showDate: true
@@ -37,4 +36,4 @@ Categories Include:
 
 Secure your spot on the grid. Build your squad, review your playbooks, and prepare for kickoff.
 
-![Preview](2026-06-11-235940_hyprshot.png)
+![Preview](feature-0ffs1de.png)
