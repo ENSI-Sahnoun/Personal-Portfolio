@@ -1,0 +1,45 @@
+<!-- EXTEND-HEAD-UNCACHED -->
+{{- with .Params.fontUrl }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{{ . }}" rel="stylesheet">
+{{- end }}
+
+{{- $fontBodyFile := .Params.fontBodyFile }}
+{{- $fontHeadingFile := .Params.fontHeadingFile }}
+{{- if or $fontBodyFile $fontHeadingFile }}
+<style>
+  {{- if $fontBodyFile }}
+    {{- $path := trim $fontBodyFile "/" }}
+    {{- $ext := lower (path.Ext $path) }}
+    {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+@font-face {
+  font-family: 'BodyFont';
+  src: url({{ printf "/%s" $path | safeCSS }}) format('{{ $format }}');
+  font-display: swap;
+}
+  {{- end }}
+  {{- if $fontHeadingFile }}
+    {{- $path := trim $fontHeadingFile "/" }}
+    {{- $ext := lower (path.Ext $path) }}
+    {{- $format := cond (eq $ext ".woff2") "woff2" (cond (eq $ext ".woff") "woff" (cond (eq $ext ".ttf") "truetype" "opentype")) }}
+@font-face {
+  font-family: 'HeadingFont';
+  src: url({{ printf "/%s" $path | safeCSS }}) format('{{ $format }}');
+  font-display: swap;
+}
+  {{- end }}
+</style>
+{{- end }}
+
+{{- if or .Params.fontBody .Params.fontHeading }}
+<style>
+  {{- with .Params.fontBody }}
+body { font-family: {{ . | safeCSS }}; }
+  {{- end }}
+  {{- with .Params.fontHeading }}
+h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
+  {{- end }}
+</style>
+{{- end }}
+<!-- EXTEND-HEAD-LOADED -->
