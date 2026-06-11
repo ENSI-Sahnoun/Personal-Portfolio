@@ -418,3 +418,66 @@ collections:
         fields:
           - { label: Title, name: title, widget: string }
           - { label: Body, name: body, widget: markdown }
+
+  - name: settings
+    label: Settings
+    files:
+      - label: Profile
+        name: profile
+        file: config/_default/languages.en.toml
+        format: toml
+        fields:
+          - { label: Site Title, name: title, widget: string }
+          - { label: Description, name: 'params.description', widget: text, required: false }
+          - { label: Copyright, name: 'params.copyright', widget: string, required: false }
+          - label: Author
+            name: params.author
+            widget: object
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Image, name: image, widget: image, required: false, hint: 'Place in assets/img/' }
+              - { label: Headline, name: headline, widget: string, required: false }
+              - { label: Bio, name: bio, widget: text, required: false }
+              - label: Links
+                name: links
+                widget: list
+                required: false
+                fields:
+                  - { label: Platform, name: platform, widget: string, hint: 'e.g. github, twitter, email' }
+                  - { label: URL, name: url, widget: string }
+
+      - label: Theme
+        name: theme
+        file: config/_default/params.toml
+        format: toml
+        fields:
+          - { label: Color Scheme, name: colorScheme, widget: select, options: ['blowfish', 'slate', 'autumn', 'avocado', 'bloody', 'congo', 'fire', 'forest', 'github', 'marvel', 'neon', 'noir', 'one-light', 'princess', 'terminal'], default: 'slate' }
+          - { label: Default Appearance, name: defaultAppearance, widget: select, options: ['light', 'dark'], default: 'light' }
+          - { label: Auto Switch Appearance, name: autoSwitchAppearance, widget: boolean, default: true }
+          - label: Header
+            name: header
+            widget: object
+            required: false
+            fields:
+              - { label: Layout, name: layout, widget: select, options: ['basic', 'fixed', 'fixed-fill', 'fixed-gradient', 'fixed-fill-blur'], default: 'basic' }
+          - label: Footer
+            name: footer
+            widget: object
+            required: false
+            fields:
+              - { label: Show Menu, name: showMenu, widget: boolean, default: true }
+              - { label: Show Copyright, name: showCopyright, widget: boolean, default: true }
+              - { label: Show Theme Attribution, name: showThemeAttribution, widget: boolean, default: true }
+              - { label: Show Appearance Switcher, name: showAppearanceSwitcher, widget: boolean, default: true }
+              - { label: Show Scroll to Top, name: showScrollToTop, widget: boolean, default: true }
+          - label: Homepage
+            name: homepage
+            widget: object
+            required: false
+            fields:
+              - { label: Layout, name: layout, widget: select, options: ['page', 'profile', 'hero', 'card', 'background', 'custom'], default: 'profile' }
+              - { label: Homepage Image, name: homepageImage, widget: image, required: false }
+              - { label: Show Recent, name: showRecent, widget: boolean, default: true }
+              - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5 }
+              - { label: Card View, name: cardView, widget: boolean }
+              - { label: Show More Link, name: showMoreLink, widget: boolean }
