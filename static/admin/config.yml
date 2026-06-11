@@ -1,0 +1,120 @@
+local_backend: true
+
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: assets/img
+public_folder: img
+
+collections:
+  - name: writeups
+    label: Writeups
+    label_singular: Writeup
+    folder: content/writeups
+    path: '{{slug}}/index'
+    create: true
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: 'URL path (e.g. "my-writeup")', required: false }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: blog
+    label: Blog
+    label_singular: Post
+    folder: content/blog
+    path: '{{slug}}/index'
+    create: true
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: 'URL path (e.g. "my-post")', required: false }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: achievements
+    label: Achievements
+    label_singular: Achievement
+    folder: content/achievements
+    path: '{{slug}}/index'
+    create: true
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: 'URL path (e.g. "my-achievement")', required: false }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: ctfs
+    label: CTFs
+    label_singular: CTF
+    folder: content/ctfs
+    path: '{{slug}}/index'
+    create: true
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: 'URL path (e.g. "my-ctf")', required: false }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: content/projects
+    path: '{{slug}}/index'
+    create: true
+    format: frontmatter
+    slug: '{{slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: 'URL path (e.g. "my-project")', required: false }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Description, name: description, widget: string, required: false }
+      - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: pages
+    label: Pages
+    files:
+      - label: About
+        name: about
+        file: content/about/_index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
+      - label: Resume
+        name: resume
+        file: content/resume/_index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
