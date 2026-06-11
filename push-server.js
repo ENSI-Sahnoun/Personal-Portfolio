@@ -2,7 +2,7 @@ const http = require("http");
 const { execSync } = require("child_process");
 const path = require("path");
 
-const repo = process.argv[2] || ".";
+const repo = path.resolve(process.argv[2] || ".");
 const START_TIME = Date.now();
 
 http.createServer((req, res) => {
@@ -65,7 +65,7 @@ http.createServer((req, res) => {
         const removed = [];
         for (const p of paths) {
           const full = pathModule.join(repo, p);
-          try { fs.rmdirSync(full); removed.push(p); } catch {}
+          try { fs.rmdirSync(full); removed.push(p); } catch (e) { console.log("[clean] failed to delete", full, e.message); }
         }
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify({ removed: removed.length, paths: removed }));
