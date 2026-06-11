@@ -425,26 +425,7 @@ collections:
       - label: Profile
         name: profile
         file: config/_default/languages.en.toml
-        format: toml
-        fields:
-          - { label: Site Title, name: title, widget: string }
-          - { label: Description, name: 'params.description', widget: text, required: false }
-          - { label: Copyright, name: 'params.copyright', widget: string, required: false }
-          - label: Author
-            name: params.author
-            widget: object
-            fields:
-              - { label: Name, name: name, widget: string }
-              - { label: Image, name: image, widget: image, required: false, hint: 'Place in assets/img/' }
-              - { label: Headline, name: headline, widget: string, required: false }
-              - { label: Bio, name: bio, widget: text, required: false }
-              - label: Links
-                name: links
-                widget: list
-                required: false
-                fields:
-                  - { label: Platform, name: platform, widget: string, hint: 'e.g. github, twitter, email' }
-                  - { label: URL, name: url, widget: string }
+        format: raw
 
       - label: Theme
         name: theme
