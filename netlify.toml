@@ -7,3 +7,8 @@
 
 [context.production.environment]
   HUGO_ENV = "production"
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/"
+  status = 404
