@@ -1,4 +1,5 @@
 disableImageOptimization = false
+backgroundImageWidth = 2560
 defaultAppearance = "dark"
 enableCodeCopy = false
 autoSwitchAppearance = true
@@ -74,6 +75,7 @@ showRecentItems = 5
 showMoreLink = true
 cardView = true
 cardViewScreenWidth = true
+homepageImage = "img/falling-leaves-in-the-city.1920x1080.gif"
 
 [buymeacoffee]
 

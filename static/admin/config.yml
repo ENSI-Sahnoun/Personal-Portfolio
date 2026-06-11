@@ -466,6 +466,7 @@ collections:
               - { label: Enable Structured Breadcrumbs, name: enableStructuredBreadcrumbs, widget: boolean, required: false }
               - { label: Reply By Email, name: replyByEmail, widget: boolean, required: false }
               - { label: Disable Image Optimization, name: disableImageOptimization, widget: boolean, required: false }
+              - { label: Background Image Width (px), name: backgroundImageWidth, widget: number, default: 2560, required: false, hint: 'Higher = better quality but slower. 1920 or 2560 recommended.' }
               - { label: Disable Text In Header, name: disableTextInHeader, widget: boolean, required: false }
               - { label: Hotlink Feature Image, name: hotlinkFeatureImage, widget: boolean, required: false }
               - { label: Fingerprint Algorithm, name: fingerprintAlgorithm, widget: select, options: ['sha512', 'sha384', 'sha256'], default: 'sha512', required: false }

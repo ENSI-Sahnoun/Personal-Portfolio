@@ -2,7 +2,7 @@ disabled = false
 locale = "en"
 label = "English"
 weight = 1
-title = "SAH"
+title = "SAHSOUHA"
 body = "test"
 
 [params]
@@ -12,12 +12,14 @@ rtl = false
 dateFormat = "2 January 2006"
 description = ""
 copyright = "© TEZ - 2026"
+logo = "img/waguribw.png"
 
 [params.author]
-name = "sah"
+name = "sahsouha"
 imageQuality = 96
 headline = "Cybersecurity is my playstation"
 bio = "ENSI Student & CTF Player"
+image = "img/waguri.png"
 
 [[params.author.links]]
 email = "mailto:youremail@example.com"
