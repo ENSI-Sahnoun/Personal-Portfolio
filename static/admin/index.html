@@ -77,15 +77,20 @@
       btn.className = "pushing";
       btn.disabled = true;
       btn.textContent = "Pushing...";
-      fetch(PUSH_URL).then(function(r) { return r.text(); }).then(function(m) {
+      fetch(PUSH_URL).then(function(r) {
+        return r.text().then(function(m) {
+          if (r.ok) { return m; }
+          throw new Error(m);
+        });
+      }).then(function(m) {
         btn.className = "success";
         btn.textContent = "\u2713 " + m;
         refreshStatus();
-        setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 2000);
-      }).catch(function() {
-        btn.className = "error";
-        btn.textContent = "\u2716 Failed (server running?)";
         setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 3000);
+      }).catch(function(e) {
+        btn.className = "error";
+        btn.textContent = "\u2716 " + (e.message || "Failed — server running?");
+        setTimeout(function() { btn.className = ""; btn.textContent = "Push to GitHub"; btn.disabled = false; }, 8000);
       });
     }
 

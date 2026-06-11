@@ -18,16 +18,19 @@ http.createServer((req, res) => {
   if (req.url === "/push" && req.method === "GET") {
     try {
       const out = execSync("git add -A && git commit -m 'Update from CMS' && git push", {
-        cwd: repo, stdio: "pipe", encoding: "utf8",
+        cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 60000,
       });
       res.end("Pushed");
     } catch (e) {
       const msg = (e.stderr || e.message || "").toString();
       if (/nothing to commit|nothing added|everything up-to-date/i.test(msg)) {
         res.end("Nothing to push");
+      } else if (e.code === "ETIMEDOUT" || e.killed) {
+        res.statusCode = 500;
+        res.end("Error: Timed out (60s)");
       } else {
         res.statusCode = 500;
-        res.end("Error: " + msg.slice(0, 200));
+        res.end("Error: " + msg.slice(0, 300));
       }
     }
     return;
