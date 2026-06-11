@@ -26,9 +26,11 @@ layoutBackgroundHeaderSpace = false
 showTermCount = false
 
 [fonts]
-fontHeading = ""
-fontHeadingFile = "/fonts/moistlyvengionsdemo-regular.otf"
+fontUrl = ""
+fontBody = "'BodyFont'"
+fontHeading = "'HeadingFont'"
 fontBodyFile = "/fonts/moistlyvengionsdemo-regular.otf"
+fontHeadingFile = "/fonts/moistlyvengionsdemo-regular.otf"
 
 [rssnext]
 
