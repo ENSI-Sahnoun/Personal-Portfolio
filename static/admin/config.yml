@@ -22,8 +22,68 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+
+      - label: Media
+        name: media
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Feature Image, name: featureimage, widget: image, required: false, hint: 'Path to image in assets/img/' }
+          - { label: Feature Image Caption, name: featureimagecaption, widget: string, required: false }
+          - { label: Show Hero Image, name: showHero, widget: boolean, required: false, default: true }
+          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
+
+      - label: Display
+        name: display
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Show Date, name: showDate, widget: boolean, required: false, default: true }
+          - { label: Show Updated Date, name: showDateUpdated, widget: boolean, required: false }
+          - { label: Show Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+          - { label: Show Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+          - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+          - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+          - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
+          - { label: Show Pagination, name: showPagination, widget: boolean, required: false, default: true }
+          - { label: Show Author, name: showAuthor, widget: boolean, required: false, default: true }
+          - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
+          - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
+          - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, required: false, default: true }
+          - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
+          - { label: Show Comments, name: showComments, widget: boolean, required: false }
+          - { label: Show Summary, name: showSummary, widget: boolean, required: false }
+          - { label: Show Edit Link, name: showEdit, widget: boolean, required: false }
+
+      - label: Layout
+        name: layout_opts
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Background Blur, name: layoutBackgroundBlur, widget: boolean, required: false, default: true }
+          - { label: Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, required: false, default: true }
+          - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
+          - { label: Group By Year, name: groupByYear, widget: boolean, required: false, default: true }
+          - { label: Open Links in New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
+
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Robots, name: robots, widget: string, required: false }
+          - { label: Exclude From Search, name: excludeFromSearch, widget: boolean, required: false }
+
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Series, name: series, widget: list, required: false }
+      - { label: Series Order, name: series_order, widget: number, required: false }
+      - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Link to external site instead of generating a page' }
+
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }
 
@@ -41,8 +101,68 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+
+      - label: Media
+        name: media
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Feature Image, name: featureimage, widget: image, required: false, hint: 'Path to image in assets/img/' }
+          - { label: Feature Image Caption, name: featureimagecaption, widget: string, required: false }
+          - { label: Show Hero Image, name: showHero, widget: boolean, required: false, default: true }
+          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
+
+      - label: Display
+        name: display
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Show Date, name: showDate, widget: boolean, required: false, default: true }
+          - { label: Show Updated Date, name: showDateUpdated, widget: boolean, required: false }
+          - { label: Show Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+          - { label: Show Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+          - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+          - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+          - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
+          - { label: Show Pagination, name: showPagination, widget: boolean, required: false, default: true }
+          - { label: Show Author, name: showAuthor, widget: boolean, required: false, default: true }
+          - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
+          - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
+          - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, required: false, default: true }
+          - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
+          - { label: Show Comments, name: showComments, widget: boolean, required: false }
+          - { label: Show Summary, name: showSummary, widget: boolean, required: false }
+          - { label: Show Edit Link, name: showEdit, widget: boolean, required: false }
+
+      - label: Layout
+        name: layout_opts
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Background Blur, name: layoutBackgroundBlur, widget: boolean, required: false, default: true }
+          - { label: Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, required: false, default: true }
+          - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
+          - { label: Group By Year, name: groupByYear, widget: boolean, required: false, default: true }
+          - { label: Open Links in New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
+
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Robots, name: robots, widget: string, required: false }
+          - { label: Exclude From Search, name: excludeFromSearch, widget: boolean, required: false }
+
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Series, name: series, widget: list, required: false }
+      - { label: Series Order, name: series_order, widget: number, required: false }
+      - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Link to external site instead of generating a page' }
+
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }
 
@@ -60,8 +180,68 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+
+      - label: Media
+        name: media
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Feature Image, name: featureimage, widget: image, required: false, hint: 'Path to image in assets/img/' }
+          - { label: Feature Image Caption, name: featureimagecaption, widget: string, required: false }
+          - { label: Show Hero Image, name: showHero, widget: boolean, required: false, default: true }
+          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
+
+      - label: Display
+        name: display
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Show Date, name: showDate, widget: boolean, required: false, default: true }
+          - { label: Show Updated Date, name: showDateUpdated, widget: boolean, required: false }
+          - { label: Show Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+          - { label: Show Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+          - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+          - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+          - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
+          - { label: Show Pagination, name: showPagination, widget: boolean, required: false, default: true }
+          - { label: Show Author, name: showAuthor, widget: boolean, required: false, default: true }
+          - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
+          - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
+          - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, required: false, default: true }
+          - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
+          - { label: Show Comments, name: showComments, widget: boolean, required: false }
+          - { label: Show Summary, name: showSummary, widget: boolean, required: false }
+          - { label: Show Edit Link, name: showEdit, widget: boolean, required: false }
+
+      - label: Layout
+        name: layout_opts
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Background Blur, name: layoutBackgroundBlur, widget: boolean, required: false, default: true }
+          - { label: Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, required: false, default: true }
+          - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
+          - { label: Group By Year, name: groupByYear, widget: boolean, required: false, default: true }
+          - { label: Open Links in New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
+
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Robots, name: robots, widget: string, required: false }
+          - { label: Exclude From Search, name: excludeFromSearch, widget: boolean, required: false }
+
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Series, name: series, widget: list, required: false }
+      - { label: Series Order, name: series_order, widget: number, required: false }
+      - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Link to external site instead of generating a page' }
+
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }
 
@@ -79,8 +259,68 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+
+      - label: Media
+        name: media
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Feature Image, name: featureimage, widget: image, required: false, hint: 'Path to image in assets/img/' }
+          - { label: Feature Image Caption, name: featureimagecaption, widget: string, required: false }
+          - { label: Show Hero Image, name: showHero, widget: boolean, required: false, default: true }
+          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
+
+      - label: Display
+        name: display
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Show Date, name: showDate, widget: boolean, required: false, default: true }
+          - { label: Show Updated Date, name: showDateUpdated, widget: boolean, required: false }
+          - { label: Show Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+          - { label: Show Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+          - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+          - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+          - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
+          - { label: Show Pagination, name: showPagination, widget: boolean, required: false, default: true }
+          - { label: Show Author, name: showAuthor, widget: boolean, required: false, default: true }
+          - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
+          - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
+          - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, required: false, default: true }
+          - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
+          - { label: Show Comments, name: showComments, widget: boolean, required: false }
+          - { label: Show Summary, name: showSummary, widget: boolean, required: false }
+          - { label: Show Edit Link, name: showEdit, widget: boolean, required: false }
+
+      - label: Layout
+        name: layout_opts
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Background Blur, name: layoutBackgroundBlur, widget: boolean, required: false, default: true }
+          - { label: Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, required: false, default: true }
+          - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
+          - { label: Group By Year, name: groupByYear, widget: boolean, required: false, default: true }
+          - { label: Open Links in New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
+
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Robots, name: robots, widget: string, required: false }
+          - { label: Exclude From Search, name: excludeFromSearch, widget: boolean, required: false }
+
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Series, name: series, widget: list, required: false }
+      - { label: Series Order, name: series_order, widget: number, required: false }
+      - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Link to external site instead of generating a page' }
+
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }
 
@@ -98,8 +338,68 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: string, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
+
+      - label: Media
+        name: media
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Feature Image, name: featureimage, widget: image, required: false, hint: 'Path to image in assets/img/' }
+          - { label: Feature Image Caption, name: featureimagecaption, widget: string, required: false }
+          - { label: Show Hero Image, name: showHero, widget: boolean, required: false, default: true }
+          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
+
+      - label: Display
+        name: display
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Show Date, name: showDate, widget: boolean, required: false, default: true }
+          - { label: Show Updated Date, name: showDateUpdated, widget: boolean, required: false }
+          - { label: Show Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+          - { label: Show Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+          - { label: Show Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+          - { label: Show Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+          - { label: Show Taxonomies, name: showTaxonomies, widget: boolean, required: false }
+          - { label: Show Pagination, name: showPagination, widget: boolean, required: false, default: true }
+          - { label: Show Author, name: showAuthor, widget: boolean, required: false, default: true }
+          - { label: Show Author Bottom, name: showAuthorBottom, widget: boolean, required: false }
+          - { label: Show Authors Badges, name: showAuthorsBadges, widget: boolean, required: false }
+          - { label: Show Heading Anchors, name: showHeadingAnchors, widget: boolean, required: false, default: true }
+          - { label: Show Zen Mode, name: showZenMode, widget: boolean, required: false }
+          - { label: Show Comments, name: showComments, widget: boolean, required: false }
+          - { label: Show Summary, name: showSummary, widget: boolean, required: false }
+          - { label: Show Edit Link, name: showEdit, widget: boolean, required: false }
+
+      - label: Layout
+        name: layout_opts
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Background Blur, name: layoutBackgroundBlur, widget: boolean, required: false, default: true }
+          - { label: Background Header Space, name: layoutBackgroundHeaderSpace, widget: boolean, required: false, default: true }
+          - { label: Invert Pagination, name: invertPagination, widget: boolean, required: false }
+          - { label: Group By Year, name: groupByYear, widget: boolean, required: false, default: true }
+          - { label: Open Links in New Tab, name: externalLinkForceNewTab, widget: boolean, required: false }
+
+      - label: SEO
+        name: seo
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Robots, name: robots, widget: string, required: false }
+          - { label: Exclude From Search, name: excludeFromSearch, widget: boolean, required: false }
+
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
+      - { label: Series, name: series, widget: list, required: false }
+      - { label: Series Order, name: series_order, widget: number, required: false }
+      - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Link to external site instead of generating a page' }
+
       - { label: Draft, name: draft, widget: boolean, default: false }
       - { label: Body, name: body, widget: markdown }
 
