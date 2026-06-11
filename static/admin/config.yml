@@ -426,6 +426,8 @@ collections:
         name: profile
         file: config/_default/languages.en.toml
         format: raw
+        fields:
+          - { label: Content, name: body, widget: text }
 
       - label: Theme
         name: theme
