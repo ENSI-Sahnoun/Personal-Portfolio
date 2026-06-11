@@ -2,7 +2,7 @@ disabled = false
 locale = "en"
 label = "English"
 weight = 1
-title = "sahsouha"
+title = "sah"
 body = "test"
 
 [params]
@@ -15,17 +15,17 @@ copyright = "© TEZ - 2026"
 logo = "img/waguribw.png"
 
 [params.author]
-name = "sahsouha"
+name = "Sahnoun"
 imageQuality = 96
 headline = "CyberSecurity is my PlayStation"
 bio = "ENSI Student & CTF Player"
-image = "img/waguri.png"
+image = "img/selfie.png"
 
 [[params.author.links]]
-email = "mailto:youremail@example.com"
+email = "mailto:work@sahnoun.dev"
 
 [[params.author.links]]
-github = "https://github.com/username"
+github = "https://github.com/ENSI-Sahnoun"
 
 [[params.author.links]]
-twitter = "https://twitter.com/username"
+linkedin = "https://www.linkedin.com/in/sahnounyoussef"
