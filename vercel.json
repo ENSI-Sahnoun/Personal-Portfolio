@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/admin/:path*",
-      "destination": "/404.html"
+      "source": "/admin(/:path*)?",
+      "destination": "/",
+      "permanent": false
     }
   ]
 }
