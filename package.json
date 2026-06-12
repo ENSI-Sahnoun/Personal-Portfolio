@@ -1,0 +1,17 @@
+{
+  "name": "sah-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tinacms dev -c \"hugo server -D\"",
+    "build": "tinacms build && hugo",
+    "build-local": "tinacms build --content=local --skip-cloud-checks -c \"hugo\""
+  },
+  "dependencies": {
+    "@tinacms/cli": "^2.4.4",
+    "decap-server": "^3.9.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tinacms": "^3.8.1"
+  }
+}

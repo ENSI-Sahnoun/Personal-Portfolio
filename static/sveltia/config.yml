@@ -1,6 +1,6 @@
 backend:
-  name: proxy
-  proxy_url: http://localhost:8081/api/v1
+  name: github
+  repo: sah/personal-portfolio
   branch: main
 
 media_folder: assets/img
@@ -13,37 +13,16 @@ collections:
     folder: content/writeups
     create: true
     format: frontmatter
-    sortable_fields:
-      - field: date
-        default_sort: desc
-    view_filters:
-      - label: Crypto
-        field: category
-        pattern: crypto
-      - label: Web
-        field: category
-        pattern: web
-      - label: Pwn
-        field: category
-        pattern: pwn
-      - label: Reverse
-        field: category
-        pattern: reverse
-      - label: Forensics
-        field: category
-        pattern: forensics
-      - label: OSINT
-        field: category
-        pattern: osint
-      - label: Misc
-        field: category
-        pattern: misc
-      - label: Malware
-        field: category
-        pattern: malware
+    nested:
+      depth: 100
+      summary: '{{title}}'
+    meta:
+      path:
+        widget: string
+        label: 'Path'
+        index_file: 'index'
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: Category, name: category, widget: select, options: ['crypto', 'web', 'pwn', 'reverse', 'forensics', 'osint', 'misc', 'malware', 'ai-ml', 'other'], default: 'other' }
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: text, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
@@ -83,8 +62,10 @@ collections:
     label: Blog
     label_singular: Post
     folder: content/blog
+    path: '{{slug}}/index'
     create: true
     format: frontmatter
+    slug: '{{slug}}'
     nested:
       depth: 100
       summary: '{{title}}'
@@ -131,8 +112,10 @@ collections:
     label: Achievements
     label_singular: Achievement
     folder: content/achievements
+    path: '{{slug}}/index'
     create: true
     format: frontmatter
+    slug: '{{slug}}'
     nested:
       depth: 100
       summary: '{{title}}'
@@ -179,8 +162,10 @@ collections:
     label: CTFs
     label_singular: CTF
     folder: content/ctfs
+    path: '{{slug}}/index'
     create: true
     format: frontmatter
+    slug: '{{slug}}'
     nested:
       depth: 100
       summary: '{{title}}'
@@ -227,8 +212,10 @@ collections:
     label: Projects
     label_singular: Project
     folder: content/projects
+    path: '{{slug}}/index'
     create: true
     format: frontmatter
+    slug: '{{slug}}'
     nested:
       depth: 100
       summary: '{{title}}'

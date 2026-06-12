@@ -6,6 +6,7 @@ weight: 3
 media:
   showHero: true
   featureimage: feature-website.jpeg
+showTableOfContents: true
 display:
   showDate: true
   showReadingTime: true

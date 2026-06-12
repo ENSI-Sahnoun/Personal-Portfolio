@@ -2,7 +2,7 @@ disabled = false
 locale = "en"
 label = "English"
 weight = 1
-title = "sah"
+title = "Sah"
 body = "test"
 
 [params]
@@ -20,7 +20,7 @@ imageQuality = 96
 headline = ""
 headlines = ["CyberSecurity enthusiast", "Technical Trainer @ OSSEC", "Design Manager @ OSSEC", "CTF Player", "ENSI Student", "Freelance Video Editor"]
 bio = "ENSI Student & CTF Player"
-image = "img/selfie.png"
+image = "img/waguri.png"
 
 [[params.author.links]]
 email = "mailto:work@sahnoun.dev"

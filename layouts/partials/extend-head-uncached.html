@@ -32,13 +32,16 @@
 </style>
 {{- end }}
 
-{{- if or .Params.fontBody .Params.fontHeading }}
+{{- if or .Params.fontBody .Params.fontHeading .Params.fontNavbar }}
 <style>
   {{- with .Params.fontBody }}
 body { font-family: {{ . | safeCSS }}; }
   {{- end }}
   {{- with .Params.fontHeading }}
 h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
+  {{- end }}
+  {{- with .Params.fontNavbar }}
+.main-menu, .main-menu * { font-family: {{ . | safeCSS }}; }
   {{- end }}
 </style>
 {{- end }}

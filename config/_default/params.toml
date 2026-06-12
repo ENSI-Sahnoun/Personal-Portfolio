@@ -3,7 +3,7 @@ defaultAppearance = "dark"
 enableCodeCopy = false
 autoSwitchAppearance = true
 mainSections = ["writeups", "blog", "achievements", "ctfs", "projects"]
-disableTextInHeader = false
+disableTextInHeader = true
 colorScheme = "congo"
 enableSearch = true
 fingerprintAlgorithm = "sha512"
@@ -26,9 +26,10 @@ layoutBackgroundHeaderSpace = false
 showTermCount = false
 
 [fonts]
-fontUrl = ""
-fontBody = "'BodyFont'"
-fontHeading = "'HeadingFont'"
+fontUrl = "https://fonts.googleapis.com/css2?family=Story+Script&display=swap"
+fontBody = "'Google Sans'"
+fontHeading = "'Story Script'"
+fontNavbar = ""
 fontBodyFile = ""
 fontHeadingFile = "fonts/moistlyvengionsdemo-regular.otf"
 
@@ -43,9 +44,10 @@ enableSearch = true
 enableStructuredBreadcrumbs = true
 highlightCurrentMenuArea = true
 fingerprintAlgorithm = "sha512"
-smartTOC = false
+smartTOC = true
 smartTOCHideUnfocusedChildren = false
 enableCodeCopy = true
+disableTextInHeader = true
 
 [articleDefaults]
 layoutBackgroundHeaderSpace = false
@@ -74,7 +76,7 @@ layoutBackgroundBlur = true
 showLikes = false
 
 [header]
-layout = "fixed-fill-blur"
+layout = "fixed-fill"
 
 [homepage]
 layout = "background"
@@ -102,6 +104,13 @@ cardView = false
 showHero = false
 layoutBackgroundBlur = true
 showLikes = false
+
+[favicon]
+svg = "favicon.svg"
+png32 = "favicon-32x32.png"
+png16 = "favicon-16x16.png"
+appleTouch = "apple-touch-icon.png"
+manifest = "site.webmanifest"
 
 [sitemap]
 excludedKinds = ["taxonomy", "term"]

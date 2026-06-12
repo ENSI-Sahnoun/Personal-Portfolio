@@ -9,33 +9,6 @@
   {{ if .Site.Params.enableA11y | default false }}
     {{ partial "header/components/a11y.html" (dict "prefix" "desktop-") }}
   {{ end }}
-
-  {{ if .Site.Params.enableSearch | default false }}
-    <button
-      id="search-button"
-      aria-label="Search"
-      class="text-base bf-icon-color-hover"
-      title="{{ i18n "search.open_button_title" }}">
-      {{ partial "icon.html" "search" }}
-    </button>
-  {{ end }}
-
-  {{ if .Site.Params.footer.showAppearanceSwitcher | default false }}
-    <div class="flex items-center">
-      <button
-        id="appearance-switcher"
-        aria-label="Dark mode switcher"
-        type="button"
-        class="text-base bf-icon-color-hover">
-        <div class="flex items-center justify-center dark:hidden">
-          {{ partial "icon.html" "moon" }}
-        </div>
-        <div class="items-center justify-center hidden dark:flex">
-          {{ partial "icon.html" "sun" }}
-        </div>
-      </button>
-    </div>
-  {{ end }}
 </nav>
 
 {{ define "DesktopMenu" }}
