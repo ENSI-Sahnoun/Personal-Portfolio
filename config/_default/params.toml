@@ -79,7 +79,7 @@ layout = "fixed-fill-blur"
 [homepage]
 layout = "background"
 showRecent = true
-showRecentItems = 4
+showRecentItems = 5
 showMoreLink = true
 cardView = true
 cardViewScreenWidth = true

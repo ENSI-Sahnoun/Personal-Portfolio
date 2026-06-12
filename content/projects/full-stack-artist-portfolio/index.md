@@ -2,8 +2,10 @@
 title: Full Stack Artist Portfolio
 slug: artistportfolio
 date: 2026-05-07T21:45:04.000+01:00
+weight: 3
 media:
   showHero: true
+  featureimage: feature-website.jpeg
 display:
   showDate: true
   showReadingTime: true
