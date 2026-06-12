@@ -7,6 +7,7 @@
         <div class="fixed inset-x-0 top-0 -z-10">
           {{ $useDefault := true }}
           {{ $homepageImage := "" }}
+          {{ $isVideo := false }}
           {{ with .Site.Params.defaultBackgroundImage }}
             {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
               {{ $homepageImage = resources.GetRemote . }}
@@ -24,17 +25,30 @@
             {{ end }}
           {{ end }}
           {{ if $homepageImage }}
+            {{ $ext := lower (path.Ext $homepageImage.RelPermalink) }}
+            {{ $isVideo = or (eq $ext ".mp4") (eq $ext ".webm") (eq $ext ".mov") (eq $ext ".ogv") }}
             {{ $style := "" }}
             {{ $defaultPosition := cond $useDefault site.Params.imagePosition false }}
             {{ with $.Params.imagePosition | default $defaultPosition }}
               {{ $style = printf "object-position: %s;" . }}
             {{ end }}
-            <img
-              id="background-image"
-              class="nozoom mt-0 mr-0 mb-0 ml-0 h-[1000px] w-full object-cover"
-              src="{{ $homepageImage.RelPermalink }}"
-              role="presentation"
-              {{ if $style }}style="{{ $style | safeCSS }}"{{ end }}>
+            {{ if $isVideo }}
+              <video
+                id="background-image"
+                class="nozoom mt-0 mr-0 mb-0 ml-0 h-[1000px] w-full object-cover"
+                src="{{ $homepageImage.RelPermalink }}"
+                autoplay muted loop playsinline
+                role="presentation"
+                {{ if $style }}style="{{ $style | safeCSS }}"{{ end }}>
+              </video>
+            {{ else }}
+              <img
+                id="background-image"
+                class="nozoom mt-0 mr-0 mb-0 ml-0 h-[1000px] w-full object-cover"
+                src="{{ $homepageImage.RelPermalink }}"
+                role="presentation"
+                {{ if $style }}style="{{ $style | safeCSS }}"{{ end }}>
+            {{ end }}
             <div
               class="from-neutral absolute inset-0 h-[1000px] bg-gradient-to-t to-transparent mix-blend-normal dark:from-neutral-800"></div>
             <div
@@ -138,7 +152,7 @@
           el.textContent = headlines[i];
           el.style.opacity = "1";
         }, 300);
-      }, 4000);
+      }, 2000);
     }
   })();
 </script>

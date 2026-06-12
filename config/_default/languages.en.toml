@@ -17,13 +17,8 @@ logo = "img/waguribw.png"
 [params.author]
 name = "Sahnoun"
 imageQuality = 96
-headline = "CyberSecurity is my PlayStation"
-headlines = [
-  "CyberSecurity is my PlayStation",
-  "ENSI Student",
-  "CTF Player",
-  "Open Source Enjoyer",
-]
+headline = "CyberSecurity enthusiast"
+headlines = ["Technical Trainer @ OSSEC", "Design Manager @ OSSEC", "CTF Player"]
 bio = "ENSI Student & CTF Player"
 image = "img/selfie.png"
 
