@@ -442,6 +442,7 @@ collections:
                   - { label: Name, name: name, widget: string }
                   - { label: Image, name: image, widget: image, required: false, hint: 'Place image in assets/img/' }
                   - { label: Headline, name: headline, widget: string, required: false }
+                  - { label: Rotating Headlines, name: headlines, widget: list, required: false, hint: 'Extra headlines to cycle through (first one is the main headline)' }
                   - { label: Bio, name: bio, widget: text, required: false }
 
       - label: Theme

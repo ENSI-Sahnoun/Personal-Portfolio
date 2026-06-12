@@ -1,0 +1,68 @@
+{{ $disableImageOptimization := .Site.Params.disableImageOptimization | default false }}
+<article
+  class="{{ if not .Site.Params.homepage.showRecent }}
+    h-full
+  {{ end }} flex flex-col items-center justify-center text-center">
+  <header class="relative px-1 py-1 flex flex-col items-center mb-3">
+    {{ with .Site.Params.Author.image }}
+      {{ $authorImage := "" }}
+      {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
+        {{ $authorImage = resources.GetRemote . }}
+      {{ else }}
+        {{ $authorImage = resources.Get . }}
+      {{ end }}
+      {{ if $authorImage }}
+        {{ $final := $authorImage }}
+        {{ $squareImage := $authorImage }}
+        {{ if not (or $disableImageOptimization (eq $authorImage.MediaType.SubType "svg")) }}
+          {{ $final = $authorImage.Fill (print "288x288 q" ( $.Site.Params.Author.imagequality | default "96" )) }}
+          {{ $shortSide := int (math.Min $authorImage.Width $authorImage.Height) }}
+          {{ $squareImage = $authorImage.Crop (printf "%dx%d" $shortSide $shortSide ) }}
+        {{ end }}
+        <img
+          class="mb-2 h-36 w-36 rounded-full"
+          width="144"
+          height="144"
+          alt="{{ $.Site.Params.Author.name | default `Author` }}"
+          src="{{ $final.RelPermalink }}"
+          data-zoom-src="{{ $squareImage.RelPermalink }}">
+      {{ end }}
+    {{ end }}
+    <h1 class="text-4xl font-extrabold">
+      {{ .Site.Params.Author.name | default .Site.Title }}
+    </h1>
+    <h2 id="rotating-headline" class="text-xl text-neutral-500 dark:text-neutral-400">
+      {{ index (.Site.Params.Author.headlines) 0 | default .Site.Params.Author.headline }}
+    </h2>
+    <div class="mt-1 text-2xl">
+      {{ partialCached "author-links.html" . }}
+    </div>
+  </header>
+  <section class="prose dark:prose-invert w-full">{{ .Content }}</section>
+</article>
+<section>
+  {{ partial "recent-articles/main.html" . }}
+</section>
+
+<script>
+  (function() {
+    var headlines = [
+      {{ range .Site.Params.Author.headlines }}
+        "{{ . | safeJS }}",
+      {{ end }}
+    ];
+    if (headlines.length > 1) {
+      var el = document.getElementById("rotating-headline");
+      var i = 0;
+      setInterval(function() {
+        i = (i + 1) % headlines.length;
+        el.style.opacity = "0";
+        el.style.transition = "opacity 0.3s";
+        setTimeout(function() {
+          el.textContent = headlines[i];
+          el.style.opacity = "1";
+        }, 300);
+      }, 4000);
+    }
+  })();
+</script>

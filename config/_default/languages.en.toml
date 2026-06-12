@@ -18,6 +18,12 @@ logo = "img/waguribw.png"
 name = "Sahnoun"
 imageQuality = 96
 headline = "CyberSecurity is my PlayStation"
+headlines = [
+  "CyberSecurity is my PlayStation",
+  "ENSI Student",
+  "CTF Player",
+  "Open Source Enjoyer",
+]
 bio = "ENSI Student & CTF Player"
 image = "img/selfie.png"
 
