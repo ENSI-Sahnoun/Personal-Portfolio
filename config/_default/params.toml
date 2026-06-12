@@ -45,6 +45,7 @@ highlightCurrentMenuArea = true
 fingerprintAlgorithm = "sha512"
 smartTOC = false
 smartTOCHideUnfocusedChildren = false
+enableCodeCopy = true
 
 [articleDefaults]
 layoutBackgroundHeaderSpace = false
@@ -78,7 +79,7 @@ layout = "fixed-fill-blur"
 [homepage]
 layout = "background"
 showRecent = true
-showRecentItems = 5
+showRecentItems = 4
 showMoreLink = true
 cardView = true
 cardViewScreenWidth = true

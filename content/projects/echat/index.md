@@ -1,7 +1,7 @@
 ---
 title: eChat
-date: 2025-12-10T19:52:24.000+01:00
-weight: 1
+date: 2025-12-10T19:50:00.000+01:00
+weight: 3
 media:
   showHero: true
 display:

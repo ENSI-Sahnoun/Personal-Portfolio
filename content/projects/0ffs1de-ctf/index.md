@@ -3,7 +3,7 @@ title: 0ffs1de CTF
 slug: 0ffside
 date: 2026-06-12T00:05:00.000+01:00
 description: Personal CTF
-weight: 0
+weight: 2
 media:
   showHero: true
 display:
