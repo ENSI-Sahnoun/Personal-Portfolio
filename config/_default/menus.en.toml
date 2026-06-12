@@ -1,51 +1,45 @@
 [[main]]
-  name = "Posts"
-  weight = 10
+name = "Posts"
+weight = 10
 
 [[main]]
-  name = "Writeups"
-  parent = "Posts"
-  pageRef = "writeups"
-  weight = 10
+name = "Writeups"
+parent = "Posts"
+pageRef = "writeups"
+weight = 10
 
 [[main]]
-  name = "Blog"
-  parent = "Posts"
-  pageRef = "blog"
-  weight = 20
+name = "Blog"
+parent = "Posts"
+pageRef = "blog"
+weight = 20
 
 [[main]]
-  name = "Achievements"
-  pageRef = "achievements"
-  weight = 20
+name = "Achievements"
+pageRef = "achievements"
+weight = 20
 
 [[main]]
-  name = "CTFs"
-  parent = "Posts"
-  pageRef = "ctfs"
-  weight = 30
+name = "Projects"
+pageRef = "projects"
+weight = 40
 
 [[main]]
-  name = "Projects"
-  pageRef = "projects"
-  weight = 40
+name = "Resume"
+pageRef = "resume"
+weight = 50
 
 [[main]]
-  name = "Resume"
-  pageRef = "resume"
-  weight = 50
-
-[[main]]
-  name = "About"
-  pageRef = "about"
-  weight = 60
+name = "About"
+pageRef = "about"
+weight = 60
 
 [[footer]]
-  name = "Tags"
-  pageRef = "tags"
-  weight = 10
+name = "Tags"
+pageRef = "tags"
+weight = 10
 
 [[footer]]
-  name = "About"
-  pageRef = "about"
-  weight = 20
+name = "About"
+pageRef = "about"
+weight = 20
