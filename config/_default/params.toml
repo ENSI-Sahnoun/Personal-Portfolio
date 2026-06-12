@@ -1,4 +1,5 @@
 disableImageOptimization = false
+skills = ["Java", "C", "C++", "Python", "Linux Bash", "Steganography", "OSINT", "CTFs", "VS Code", "Antigravity", "Prompt Engineering", "Git", "MySQL", "DNS", "HackTheBox", "TryHackMe", "AWS Hosting", "Adobe Premiere Pro", "Adobe Illustrator", "GitHub Copilot", "HTML", "CSS", "PHP", "Digital Forensics", "Agentic AI"]
 defaultAppearance = "dark"
 enableCodeCopy = false
 autoSwitchAppearance = true
@@ -8,6 +9,7 @@ colorScheme = "congo"
 enableSearch = true
 fingerprintAlgorithm = "sha512"
 hotlinkFeatureImage = false
+github_username = "ENSI-Sahnoun"
 giteaDefaultServer = "https://git.fsfe.org"
 disableImageOptimizationMD = false
 forgejoDefaultServer = "https://v11.next.forgejo.org"
@@ -15,20 +17,7 @@ backgroundImageWidth = 2560
 enableA11y = false
 replyByEmail = false
 enableStructuredBreadcrumbs = false
-
-github_username = "ENSI-Sahnoun"
-resume_url      = "/resume"
-
-skills = [
-  "Java", "C#", "JavaScript", "TypeScript",
-  "Spring Boot", "Hibernate/JPA", "REST APIs", "Microservices",
-  "ASP.NET Core", "JWT Authentication", "OAuth 2.0",
-  "Authorization & Authentication", "BCrypt Password Encoding",
-  "Angular", "AngularJS", "RxJS",
-  "MySQL", "PostgreSQL", "SQL Server",
-  "Git", "Maven", "JUnit", "Mockito",
-  "Cursor", "GitHub Copilot"
-]
+resume_url = "/resume"
 
 [selineAnalytics]
 
@@ -159,14 +148,14 @@ showLikes = false
 
 [fathomAnalytics]
 
-[verification]
-
 [footer]
 showMenu = true
 showCopyright = true
 showThemeAttribution = false
 showAppearanceSwitcher = true
 showScrollToTop = true
+
+[verification]
 
 [seo]
 
