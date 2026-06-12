@@ -80,6 +80,7 @@ http.createServer((req, res) => {
   if (req.url === "/push" && req.method === "GET") {
     console.log("[push] received push request");
     try {
+      execSync("git pull --rebase origin main 2>/dev/null || true", { cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 30000 });
       const out = execSync("git add -A && git commit -m 'Update from CMS' && git push", {
         cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 60000,
       });
