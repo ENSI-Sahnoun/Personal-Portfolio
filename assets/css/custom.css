@@ -1,0 +1,86 @@
+/* ── Shared section title ── */
+.custom-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding-bottom: 0.45rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ── Skills ── */
+.custom-skills-section {
+  margin: 2rem 0;
+}
+.custom-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.custom-skill-pill {
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.78rem;
+  color: inherit;
+  white-space: nowrap;
+  cursor: default;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+.custom-skill-pill:hover {
+  background: rgba(var(--color-primary-500), 0.12);
+  border-color: rgba(var(--color-primary-500), 0.5);
+  color: rgb(var(--color-primary-400));
+}
+
+/* ── GitHub Activity ── */
+.custom-github-section {
+  margin: 2rem 0;
+}
+
+
+/* ── Resume CTA ── */
+.custom-resume-wrapper {
+  margin: 1.8rem 0 0.5rem;
+}
+.custom-resume-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+}
+.custom-resume-cta:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-1px);
+}
+.custom-resume-cta svg {
+  flex-shrink: 0;
+}
+
+.custom-github-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.custom-github-stats-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.5rem;
+}

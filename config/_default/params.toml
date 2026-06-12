@@ -16,6 +16,20 @@ enableA11y = false
 replyByEmail = false
 enableStructuredBreadcrumbs = false
 
+github_username = "ENSI-Sahnoun"
+resume_url      = "/resume"
+
+skills = [
+  "Java", "C#", "JavaScript", "TypeScript",
+  "Spring Boot", "Hibernate/JPA", "REST APIs", "Microservices",
+  "ASP.NET Core", "JWT Authentication", "OAuth 2.0",
+  "Authorization & Authentication", "BCrypt Password Encoding",
+  "Angular", "AngularJS", "RxJS",
+  "MySQL", "PostgreSQL", "SQL Server",
+  "Git", "Maven", "JUnit", "Mockito",
+  "Cursor", "GitHub Copilot"
+]
+
 [selineAnalytics]
 
 [umamiAnalytics]

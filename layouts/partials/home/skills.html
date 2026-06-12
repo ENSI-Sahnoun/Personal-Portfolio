@@ -1,0 +1,10 @@
+{{ with .Site.Params.skills }}
+<section class="custom-skills-section">
+  <h2 class="custom-section-title">Skills</h2>
+  <div class="custom-skills-grid">
+    {{ range . }}
+      <span class="custom-skill-pill">{{ . }}</span>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

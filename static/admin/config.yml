@@ -349,6 +349,9 @@ collections:
               - { label: Show Recent Items, name: showRecent, widget: boolean, default: true, required: false }
               - { label: Recent Items Count, name: showRecentItems, widget: number, default: 5, required: false }
           - { label: Main Sections, name: mainSections, widget: list, required: false }
+          - { label: GitHub Username, name: github_username, widget: string, required: false, hint: 'Used for contribution chart on homepage' }
+          - { label: Resume URL, name: resume_url, widget: string, required: false, hint: 'Path or URL to your resume PDF' }
+          - { label: Skills, name: skills, widget: list, required: false, hint: 'Skills shown as pills on homepage', field: { label: Skill, name: skill, widget: string } }
           - label: 'Fonts'
             name: fonts
             widget: object
