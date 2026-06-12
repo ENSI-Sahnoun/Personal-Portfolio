@@ -1,0 +1,42 @@
+paths:
+  static: assets
+  uploads: assets/img
+timezone: Africa/Tunis
+markdown:
+  engine: commonmark
+  options:
+    gfm: true
+    linkify: false
+    table: false
+    strikethrough: false
+    subscript: false
+    superscript: false
+    heading_ids: false
+    breaks: false
+    xhtml: false
+    attributes: false
+    typographer: false
+    treat_indentation_as_code: true
+_snippets_imports:
+  hugo:
+    exclude:
+      - hugo_instagram
+collections_config:
+  pages:
+    path: content
+    icon: wysiwyg
+  achievements:
+    path: content/achievements
+    icon: assignment
+    glob:
+      - '!_index.md'
+  posts:
+    path: content/posts
+    icon: event_available
+    glob:
+      - '!_index.md'
+  projects:
+    path: content/projects
+    icon: eject
+    glob:
+      - '!_index.md'
