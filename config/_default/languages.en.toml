@@ -17,8 +17,8 @@ logo = "img/waguribw.png"
 [params.author]
 name = "Sahnoun"
 imageQuality = 96
-headline = "CyberSecurity enthusiast"
-headlines = ["Technical Trainer @ OSSEC", "Design Manager @ OSSEC", "CTF Player"]
+headline = ""
+headlines = ["CyberSecurity enthusiast", "Technical Trainer @ OSSEC", "Design Manager @ OSSEC", "CTF Player", "ENSI Student", "Freelance Video Editor"]
 bio = "ENSI Student & CTF Player"
 image = "img/selfie.png"
 
