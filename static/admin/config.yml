@@ -54,7 +54,7 @@ collections:
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: text, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
-      - { label: Feature Image, name: featureimage, widget: image, required: false, media_library: { name: 'uploadcare', config: { multiple: false } } }
+      - { label: Feature Image, name: featureimage, widget: image, required: false }
       - { label: Image Caption, name: featureimagecaption, widget: string, required: false }
       - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false, default: 'basic' }
       - { label: Show Hero, name: showHero, widget: boolean, required: false, default: false }
