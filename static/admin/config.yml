@@ -16,6 +16,14 @@ collections:
     sortable_fields:
       - field: date
         default_sort: desc
+    nested:
+      depth: 100
+      summary: '{{title}}'
+    meta:
+      path:
+        widget: string
+        label: 'Path'
+        index_file: '_index'
     view_filters:
       - label: Crypto
         field: category
@@ -43,36 +51,23 @@ collections:
         pattern: malware
     fields:
       - { label: Title, name: title, widget: string }
-      - { label: Category, name: category, widget: select, options: ['crypto', 'web', 'pwn', 'reverse', 'forensics', 'osint', 'misc', 'malware', 'ai-ml', 'other'], default: 'other' }
       - { label: Date, name: date, widget: datetime }
       - { label: Description, name: description, widget: text, required: false }
       - { label: Weight, name: weight, widget: number, required: false, hint: 'Lower = higher in list' }
-
-      - label: 'Feature Image'
-        name: media
-        widget: object
-        required: false
-        collapsed: true
-        fields:
-          - { label: Image, name: featureimage, widget: image, required: false }
-          - { label: Caption, name: featureimagecaption, widget: string, required: false }
-          - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false }
-
-      - label: 'Visibility Toggles'
-        name: display
-        widget: object
-        required: false
-        collapsed: true
-        fields:
-          - { label: Table of Contents, name: showTableOfContents, widget: boolean, required: false }
-          - { label: Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
-          - { label: Tags & Categories, name: showTaxonomies, widget: boolean, required: false }
-          - { label: Author Block, name: showAuthor, widget: boolean, required: false, default: true }
-          - { label: Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
-          - { label: Word Count, name: showWordCount, widget: boolean, required: false, default: true }
-          - { label: Comments, name: showComments, widget: boolean, required: false }
-          - { label: Pagination Nav, name: showPagination, widget: boolean, required: false, default: true }
-
+      - { label: Feature Image, name: featureimage, widget: image, required: false, media_library: { name: 'uploadcare', config: { multiple: false } } }
+      - { label: Image Caption, name: featureimagecaption, widget: string, required: false }
+      - { label: Hero Style, name: heroStyle, widget: select, options: ['basic', 'big', 'background', 'thumbAndBackground'], required: false, default: 'basic' }
+      - { label: Show Hero, name: showHero, widget: boolean, required: false, default: false }
+      - { label: Card View, name: cardView, widget: boolean, required: false, hint: 'Show sub-articles as cards instead of list' }
+      - { label: Group by Year, name: groupByYear, widget: boolean, required: false }
+      - { label: Table of Contents, name: showTableOfContents, widget: boolean, required: false }
+      - { label: Breadcrumbs, name: showBreadcrumbs, widget: boolean, required: false }
+      - { label: Tags & Categories, name: showTaxonomies, widget: boolean, required: false }
+      - { label: Author Block, name: showAuthor, widget: boolean, required: false, default: true }
+      - { label: Reading Time, name: showReadingTime, widget: boolean, required: false, default: true }
+      - { label: Word Count, name: showWordCount, widget: boolean, required: false, default: true }
+      - { label: Comments, name: showComments, widget: boolean, required: false }
+      - { label: Pagination Nav, name: showPagination, widget: boolean, required: false, default: true }
       - { label: Tags, name: tags, widget: list, required: false }
       - { label: Categories, name: categories, widget: list, required: false }
       - { label: External URL, name: externalUrl, widget: string, required: false, hint: 'Redirect to external site' }

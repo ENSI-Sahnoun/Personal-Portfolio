@@ -89,6 +89,14 @@
   <div id="cms-overlay-container"></div>
   <script src="https://unpkg.com/decap-cms@3.14.0/dist/decap-cms.js"></script>
   <script>
+    import('https://esm.sh/decap-cms-media-library-uploadcare@3.1.0').then(function(mod) {
+      CMS.registerMediaLibrary(mod.DecapCmsMediaLibraryUploadcare, {
+        publicKey: 'ae77b5e15dc21e25d8e6'
+      });
+    }).catch(function(err) {
+      console.error('Uploadcare media library failed to load:', err);
+    });
+
     var STATUS_URL = "http://localhost:8082/status";
     var PUSH_URL = "http://localhost:8082/push";
     var CLEAN_URL = "http://localhost:8082/clean-empty";
