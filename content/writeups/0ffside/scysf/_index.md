@@ -6,6 +6,7 @@ display:
   showReadingTime: true
   showWordCount: true
   showPagination: true
+featureimage: https://i.pinimg.com/236x/d2/f1/8d/d2f18d43ad7a77c14df6438a0f819430.jpg?nii=t
 draft: false
 ---
 Writeup for "So Close Yet So Far"
