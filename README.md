@@ -1,18 +1,7 @@
-# sahnoun.dev
-
-Personal portfolio and blog of Youssef Sahnoun — cybersecurity student, CTF player, and Design Manager @ OSSEC.
-
-Live at **[sahnoun.dev](https://sahnoun.dev)**
-
-![Home page](screenshots/home.png)
-
----
-
-## Built With
+# Personal Portfolio
 
 ![Hugo](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=hugo&logoColor=white)
 ![Blowfish](https://img.shields.io/badge/Blowfish_Theme-FF4088?style=for-the-badge&logo=hugo&logoColor=white)
-![TinaCMS](https://img.shields.io/badge/TinaCMS-EC4815?style=for-the-badge&logo=tinacms&logoColor=white)
 ![Decap CMS](https://img.shields.io/badge/Decap_CMS-FF5E5B?style=for-the-badge&logo=netlify&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -22,6 +11,15 @@ Live at **[sahnoun.dev](https://sahnoun.dev)**
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+
+
+Personal portfolio and blog of Youssef Sahnoun, ENSI Student, CTF player, Technical trainer & Design Manager @ OSSEC.
+
+🟢 Live at **[sahnoun.dev](https://sahnoun.dev)**
+
+![Home page](screenshots/home.png)
+
+---
 
 ## Content Sections
 
@@ -44,6 +42,8 @@ Starts three processes concurrently:
 1. `decap-server` — local CMS backend (no git)
 2. `push-server.js` — git push bridge on `:8082`
 3. `hugo server` — dev server with live reload
+
+or run `./dev.sh`
 
 ## Environment Variables
 
