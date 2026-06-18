@@ -1,0 +1,12 @@
+{{/* solve-path shortcode — wraps CTF solve steps in a labeled timeline
+     Usage: {{< solve-path title="Project Striker" >}} ... {{< /solve-path >}} */}}
+{{ $title := .Get "title" | default "Solve Path" }}
+<div class="solve-path-wrapper not-prose my-8">
+  <div class="solve-path-header">
+    <span class="solve-path-icon">🚩</span>
+    <span class="solve-path-title">{{ $title }}</span>
+  </div>
+  <ol class="solve-path-list">
+    {{ .Inner }}
+  </ol>
+</div>

@@ -1,0 +1,28 @@
+{{ if .IsNamedParams }}
+  {{ $.Scratch.Set "icon"         (default "triangle-exclamation" (.Get "icon")) }}
+  {{ $.Scratch.Set "cardColor"    (.Get "cardColor") }}
+  {{ $.Scratch.Set "iconColor"    (.Get "iconColor") }}
+  {{ $.Scratch.Set "textColor"    (.Get "textColor") }}
+  {{ $.Scratch.Set "borderRadius" (default "1rem" (.Get "borderRadius")) }}
+{{ else }}
+  {{ $.Scratch.Set "icon"         (default "triangle-exclamation" (.Get 0)) }}
+  {{ $.Scratch.Set "borderRadius" "1rem" }}
+{{ end }}
+
+<div
+  class="flex px-5 py-4 shadow-md"
+  style="
+    border-radius: {{ $.Scratch.Get "borderRadius" }};
+    background-color: {{ with $.Scratch.Get "cardColor" }}{{ . }}{{ else }}rgba(var(--color-primary-500), 0.18){{ end }};
+    border: 1px solid {{ with $.Scratch.Get "cardColor" }}{{ . }}{{ else }}rgba(var(--color-primary-500), 0.4){{ end }};
+    border-left: 3px solid rgb(var(--color-primary-400));
+  ">
+  <span
+    class="pe-3 flex items-center"
+    style="color: {{ with $.Scratch.Get "iconColor" }}{{ . }}{{ else }}rgb(var(--color-primary-400)){{ end }};">
+    {{ partial "icon.html" ($.Scratch.Get "icon") }}
+  </span>
+  <span style="color: {{ with $.Scratch.Get "textColor" }}{{ . }}{{ else }}inherit{{ end }};">
+    {{- .Inner | markdownify -}}
+  </span>
+</div>

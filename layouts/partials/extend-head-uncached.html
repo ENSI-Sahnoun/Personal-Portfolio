@@ -45,4 +45,21 @@ h1, h2, h3, h4, h5, h6 { font-family: {{ . | safeCSS }}; }
   {{- end }}
 </style>
 {{- end }}
+{{/* Reading progress bar — visible only on article/list pages with content */}}
+<div id="read-progress" aria-hidden="true"></div>
+<script>
+(function () {
+  var bar = document.getElementById('read-progress');
+  if (!bar) return;
+  function update() {
+    var doc = document.documentElement;
+    var scrollable = doc.scrollHeight - window.innerHeight;
+    var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    bar.style.width = Math.min(pct, 100) + '%';
+    bar.style.opacity = pct > 1 ? '1' : '0';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 <!-- EXTEND-HEAD-LOADED -->

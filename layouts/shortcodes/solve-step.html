@@ -1,0 +1,42 @@
+{{/* solve-step shortcode — one step inside a solve-path
+     Params:
+       type  = recon | enum | exploit | web | pwn | crypto | forensics | flag | misc (default: misc)
+       title = step title (required)
+       tool  = tool/technique used (optional)
+       md    = true to render .Inner as markdown (optional)
+     Usage: {{< solve-step type="recon" title="Port Scan" tool="nmap" >}}Found ports 22,80,443{{< /solve-step >}} */}}
+{{ $type  := .Get "type"  | default "misc" }}
+{{ $title := .Get "title" | default "Step" }}
+{{ $tool  := .Get "tool" }}
+{{ $md    := .Get "md" | default false }}
+
+{{ $icons := dict
+  "recon"     "🔍"
+  "enum"      "📋"
+  "exploit"   "⚡"
+  "web"       "🌐"
+  "pwn"       "💻"
+  "crypto"    "🔐"
+  "forensics" "🔬"
+  "rev"       "⚙️"
+  "osint"     "🕵️"
+  "priv"      "🛡️"
+  "flag"      "🚩"
+  "misc"      "⭐"
+}}
+{{ $icon := index $icons $type | default "⭐" }}
+
+<li class="solve-step-item solve-step--{{ $type }}">
+  <div class="solve-step-marker" aria-hidden="true">{{ $icon }}</div>
+  <div class="solve-step-body">
+    <div class="solve-step-head">
+      <span class="solve-step-title">{{ $title }}</span>
+      {{ with $tool }}<span class="solve-step-tool">{{ . }}</span>{{ end }}
+    </div>
+    {{ with .Inner }}
+      <div class="solve-step-content">
+        {{ if $md }}{{ . | markdownify }}{{ else }}{{ . }}{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</li>

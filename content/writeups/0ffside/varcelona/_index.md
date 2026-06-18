@@ -9,4 +9,11 @@ display:
 featureimage: img/2026-06-15-203144_hyprshot.png
 draft: false
 ---
-Writeup for "VARCELONA"
+{{< alert icon="flag" cardColor="rgba(var(--color-primary-500),0.1)" iconColor="rgb(var(--color-primary-400))" textColor="inherit" >}}
+**VARCELONA** &nbsp;·&nbsp; `Forensics`
+
+The fat rabbit ate the VAR audio, now we're only left with that weird file. The whole stadium is waiting for the decision...
+**Password :** tezcage
+{{< /alert >}}
+
+Writeup for "[VARCELONA](https://0ffsidectf.ddns.net/challenges)"

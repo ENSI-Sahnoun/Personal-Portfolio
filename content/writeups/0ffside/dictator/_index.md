@@ -11,4 +11,14 @@ showTaxonomies: true
 showAuthor: true
 draft: false
 ---
-Writeup for "Dictator"
+{{< alert icon="flag" cardColor="rgba(var(--color-primary-500),0.1)" iconColor="rgb(var(--color-primary-400))" textColor="inherit" >}}
+**Dictator** &nbsp;·&nbsp; `Misc`
+
+I am an illness
+I am an illness
+I am an illness, I am a disease ..
+And from me comes pain
+And the one who is addicted to me .. has no righteous followers
+{{< /alert >}}
+
+Writeup for "[Dictator](https://0ffsidectf.ddns.net/challenges)"

@@ -1,0 +1,88 @@
+{{ $writeupPages := where .Site.Pages "Section" "writeups" }}
+{{ if $writeupPages }}
+<section class="custom-heatmap-section">
+  <h2 class="custom-section-title">Writeup Activity</h2>
+  <div class="heatmap-container">
+    <div id="writeup-heatmap" class="heatmap-grid" aria-label="Writeup activity heatmap"></div>
+    <div class="heatmap-legend">
+      <span class="heatmap-legend-label">Less</span>
+      <span class="heatmap-cell" data-level="0"></span>
+      <span class="heatmap-cell" data-level="1"></span>
+      <span class="heatmap-cell" data-level="2"></span>
+      <span class="heatmap-cell" data-level="3"></span>
+      <span class="heatmap-cell" data-level="4"></span>
+      <span class="heatmap-legend-label">More</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var dates = [
+    {{ range $writeupPages }}"{{ .Date.Format "2006-01-02" }}",{{ end }}
+  ];
+
+  function render() {
+    var grid = document.getElementById('writeup-heatmap');
+    if (!grid) return;
+
+    var counts = {};
+    dates.forEach(function (d) { if (d && d !== '0001-01-01') counts[d] = (counts[d] || 0) + 1; });
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var start = new Date(today);
+    start.setFullYear(start.getFullYear() - 1);
+    start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+    var weeks = [];
+    var cur = new Date(start);
+    while (cur <= today) {
+      var week = [];
+      for (var d = 0; d < 7; d++) {
+        var key = cur.toISOString().slice(0, 10);
+        week.push({ date: key, count: counts[key] || 0 });
+        cur.setDate(cur.getDate() + 1);
+      }
+      weeks.push(week);
+    }
+
+    var html = '';
+    // month labels row
+    html += '<div class="heatmap-months">';
+    var lastMonth = -1;
+    weeks.forEach(function (week) {
+      var m = new Date(week[0].date).getMonth();
+      var names = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      html += '<span class="heatmap-month-label">' + (m !== lastMonth ? names[m] : '') + '</span>';
+      lastMonth = m;
+    });
+    html += '</div>';
+
+    // day labels + grid
+    html += '<div class="heatmap-body">';
+    html += '<div class="heatmap-days"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>';
+    html += '<div class="heatmap-weeks">';
+    weeks.forEach(function (week) {
+      html += '<div class="heatmap-week">';
+      week.forEach(function (cell) {
+        var level = cell.count === 0 ? 0 : cell.count === 1 ? 1 : cell.count === 2 ? 2 : cell.count <= 4 ? 3 : 4;
+        var d = new Date(cell.date);
+        var label = cell.date + (cell.count ? ' (' + cell.count + ' writeup' + (cell.count > 1 ? 's' : '') + ')' : '');
+        html += '<span class="heatmap-cell" data-level="' + level + '" title="' + label + '" aria-label="' + label + '"></span>';
+      });
+      html += '</div>';
+    });
+    html += '</div></div>';
+
+    grid.innerHTML = html;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render);
+  } else {
+    render();
+  }
+})();
+</script>
+{{ end }}

@@ -1,13 +1,18 @@
-<div
-  id="TOCView"
-  class="mt-0 overflow-y-auto overscroll-contain bf-scrollbar">
-  <div
-    class="mb-2 text-xs font-semibold tracking-widest uppercase text-neutral-500 dark:text-neutral-400">
-    {{ i18n "article.table_of_contents" }}
+<div id="TOCView" class="toc-custom mt-0 overflow-y-auto overscroll-contain bf-scrollbar">
+
+  <div class="toc-header">
+    <span class="toc-title"{{ with site.Params.fonts.fontHeading }} style="font-family: {{ . | safeCSS }};"{{ end }}>
+      {{ i18n "article.table_of_contents" | default "Table of Contents" }}
+    </span>
+    <div class="toc-progress-track" title="Reading progress">
+      <div id="toc-read-progress" class="toc-progress-fill"></div>
+    </div>
   </div>
-  <div class="text-sm leading-relaxed">
+
+  <div class="toc-links">
     {{ .TableOfContents | emojify }}
   </div>
+
 </div>
 
 {{ if .Site.Params.smartTOC }}
@@ -99,10 +104,19 @@
         collapseInactive
       }
 
-      window.addEventListener('scroll', () => updateTOC(config), { passive: true })
+      function updateReadProgress() {
+        const bar = document.getElementById('toc-read-progress')
+        if (!bar) return
+        const doc = document.documentElement
+        const scrollable = doc.scrollHeight - window.innerHeight
+        bar.style.width = (scrollable > 0 ? Math.min((window.scrollY / scrollable) * 100, 100) : 0) + '%'
+      }
+
+      window.addEventListener('scroll', () => { updateTOC(config); updateReadProgress() }, { passive: true })
       window.addEventListener('hashchange', () => updateTOC(config), { passive: true })
 
       updateTOC(config)
+      updateReadProgress()
     }
 
     document.readyState === 'loading'

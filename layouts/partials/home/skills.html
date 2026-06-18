@@ -3,7 +3,24 @@
   <h2 class="custom-section-title">Skills</h2>
   <div class="custom-skills-grid">
     {{ range . }}
-      <span class="custom-skill-pill">{{ . }}</span>
+      {{ $name  := "" }}
+      {{ $level := 3 }}
+      {{ if reflect.IsMap . }}
+        {{ $name  = .name  | default "" }}
+        {{ $level = int (.level | default 3) }}
+      {{ else }}
+        {{ $name = . }}
+      {{ end }}
+      {{ if $name }}
+      <span class="custom-skill-pill" title="Level {{ $level }}/5">
+        <span class="skill-label">{{ $name }}</span>
+        <span class="skill-level-dots" aria-hidden="true">
+          {{ range $i := seq 5 }}
+            <span class="skill-dot{{ if le $i $level }} filled{{ end }}"></span>
+          {{ end }}
+        </span>
+      </span>
+      {{ end }}
     {{ end }}
   </div>
 </section>

@@ -1,5 +1,31 @@
 disableImageOptimization = false
-skills = ["Java", "C", "C++", "Python", "Linux Bash", "Steganography", "OSINT", "CTFs", "VS Code", "Antigravity", "Prompt Engineering", "Git", "MySQL", "DNS", "HackTheBox", "TryHackMe", "AWS Hosting", "Adobe Premiere Pro", "Adobe Illustrator", "GitHub Copilot", "HTML", "CSS", "PHP", "Digital Forensics", "Agentic AI"]
+skills = [
+  {name = "CTFs",               level = 5},
+  {name = "C",                  level = 5},
+  {name = "Python",             level = 5},
+  {name = "Linux Bash",         level = 5},
+  {name = "OSINT",              level = 4},
+  {name = "C++",                level = 4},
+  {name = "Git",                level = 4},
+  {name = "Digital Forensics",  level = 4},
+  {name = "HTML",               level = 4},
+  {name = "CSS",                level = 4},
+  {name = "HackTheBox",        level = 4},
+  {name = "TryHackMe",         level = 4},
+  {name = "Steganography",      level = 3},
+  {name = "Java",               level = 3},
+  {name = "MySQL",              level = 3},
+  {name = "PHP",                level = 3},
+  {name = "GitHub Copilot",     level = 3},
+  {name = "DNS",                level = 3},
+  {name = "VS Code",            level = 2},
+  {name = "AWS Hosting",        level = 2},
+  {name = "Adobe Premiere Pro", level = 2},
+  {name = "Adobe Illustrator",  level = 2},
+  {name = "Agentic AI",         level = 2},
+  {name = "Prompt Engineering", level = 2},
+  {name = "Antigravity",        level = 1},
+]
 defaultAppearance = "dark"
 enableCodeCopy = false
 autoSwitchAppearance = true
@@ -27,6 +53,11 @@ resume_url = "/resume"
 layoutBackgroundBlur = false
 layoutBackgroundHeaderSpace = false
 showTermCount = false
+
+[_appearance]
+defaultAppearance = "dark"
+autoSwitchAppearance = false
+colorScheme = "congo"
 
 [fonts]
 fontUrl = "https://fonts.googleapis.com/css2?family=Story+Script&display=swap"
@@ -79,7 +110,7 @@ layoutBackgroundBlur = true
 showLikes = false
 
 [header]
-layout = "fixed-fill"
+layout = "basic"
 
 [homepage]
 layout = "background"
@@ -121,7 +152,7 @@ excludedKinds = ["taxonomy", "term"]
 [article]
 seriesOpened = false
 layoutBackgroundHeaderSpace = true
-showTableOfContents = false
+showTableOfContents = true
 showEdit = false
 showWordCount = true
 showAuthor = true
@@ -134,7 +165,7 @@ invertPagination = false
 showDraftLabel = true
 showDateUpdated = false
 showViews = false
-showBreadcrumbs = false
+showBreadcrumbs = true
 showTags = true
 showHero = false
 showPagination = true
@@ -145,6 +176,11 @@ showAuthorsBadges = false
 showReadingTime = true
 layoutBackgroundBlur = true
 showLikes = false
+
+[_images]
+hotlinkFeatureImage = true
+disableImageOptimizationMD = false
+disableImageOptimization = false
 
 [fathomAnalytics]
 
@@ -161,13 +197,13 @@ showScrollToTop = true
 
 [list]
 layoutBackgroundHeaderSpace = true
-showTableOfContents = false
+showTableOfContents = true
 cardViewScreenWidth = false
 showCards = false
 showSummary = false
 showViews = false
 groupByYear = true
-showBreadcrumbs = false
+showBreadcrumbs = true
 cardView = false
 showHero = false
 constrainItemsWidth = false

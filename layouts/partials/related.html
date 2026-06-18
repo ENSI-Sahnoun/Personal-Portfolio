@@ -1,0 +1,20 @@
+{{ if .Params.showRelatedContent | default (.Site.Params.article.showRelatedContent | default false) }}
+  {{ $section := .Section }}
+  {{ $sectionPages := where .Site.RegularPages "Section" $section }}
+  {{ $related := $sectionPages.Related . | first .Site.Params.article.relatedContentLimit }}
+  {{ with $related }}
+    <div class="writeup-related mt-8 not-prose">
+      <button class="related-toggle" onclick="this.nextElementSibling.classList.toggle('open'); this.classList.toggle('open'); this.setAttribute('aria-expanded', this.classList.contains('open'))" aria-expanded="false">
+        <span class="related-toggle-label">Show Related</span>
+        <span class="related-toggle-chevron">›</span>
+      </button>
+      <div class="writeup-related-body related-body">
+        <div class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3 pt-5">
+          {{ range . }}
+            {{ partial "article-link/card-related.html" . }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}

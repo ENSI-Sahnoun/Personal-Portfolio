@@ -1,18 +1,8 @@
 [[main]]
-name = "Posts"
-weight = 10
-
-[[main]]
 name = "Writeups"
-parent = "Posts"
+parent = ""
 pageRef = "writeups"
-weight = 10
-
-[[main]]
-name = "Blog"
-parent = "Posts"
-pageRef = "blog"
-weight = 20
+weight = 1
 
 [[main]]
 name = "Achievements"

@@ -1,0 +1,49 @@
+{{/* Related writeups for section pages — matches by category param */}}
+{{ $category := .Params.category }}
+{{ $limit := 3 }}
+{{ $current := . }}
+
+{{ $related := slice }}
+{{ if $category }}
+  {{ range where .Site.Pages "Section" "writeups" }}
+    {{ if and (ne . $current) (eq .Params.category $category) (not .Params.draft) }}
+      {{ $related = $related | append . }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{/* fallback: match by any shared tag */}}
+  {{ $tags := .Params.tags }}
+  {{ if $tags }}
+    {{ range where .Site.Pages "Section" "writeups" }}
+      {{ if and (ne . $current) (not .Params.draft) }}
+        {{ range .Params.tags }}
+          {{ if in $tags . }}
+            {{ $related = $related | append $current }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $related = $related | uniq | first $limit }}
+
+{{ with $related }}
+<div class="writeup-related mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-700 not-prose">
+  <button class="writeup-related-toggle" onclick="this.nextElementSibling.classList.toggle('open'); this.classList.toggle('open')" aria-expanded="false">
+    <span>{{ if $category }}More {{ $category | title }} writeups{{ else }}Related writeups{{ end }}</span>
+    <span class="writeup-related-chevron">›</span>
+  </button>
+  <div class="writeup-related-body">
+    <div class="grid gap-3 sm:grid-cols-3 pt-5">
+      {{ range . }}
+      <a href="{{ .RelPermalink }}" class="writeup-related-card block p-4 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-primary-400 dark:hover:border-primary-500 transition-colors no-underline">
+        {{ with .Params.category }}<span class="writeup-related-cat">{{ . }}</span>{{ end }}
+        <p class="writeup-related-title">{{ .Title }}</p>
+        {{ with .Date }}<time class="writeup-related-date">{{ .Format "Jan 2006" }}</time>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

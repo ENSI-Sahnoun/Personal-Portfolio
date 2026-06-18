@@ -1,24 +1,24 @@
 ---
 title: Full Stack Artist Portfolio
-slug: artistportfolio
 date: 2026-05-07T21:45:04.000+01:00
-weight: 3
-media:
-  showHero: true
-  featureimage: feature-website.jpeg
-showTableOfContents: true
+slug: artistportfolio
+draft: false
 display:
   showDate: true
   showReadingTime: true
   showWordCount: true
-  showPagination: true
+  showPagination: false
   showAuthor: true
   showHeadingAnchors: true
+showTableOfContents: true
+media:
+  showHero: true
+  featureimage: feature-website.jpeg
 layout_opts:
   layoutBackgroundBlur: true
   layoutBackgroundHeaderSpace: true
   groupByYear: true
-draft: false
+weight: 3
 ---
 # Portfolio Website for Mohamed Sahnoun
 

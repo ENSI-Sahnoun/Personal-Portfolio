@@ -1,25 +1,25 @@
 ---
 title: 0ffs1de CTF
-slug: 0ffside
 date: 2026-06-12T00:05:00.000+01:00
+slug: 0ffside
+draft: false
+tags: []
 description: Personal CTF
-weight: 2
 media:
   showHero: true
 display:
   showDate: true
   showReadingTime: true
   showWordCount: true
-  showPagination: true
+  showPagination: false
   showAuthor: true
   showHeadingAnchors: true
 layout_opts:
   layoutBackgroundBlur: true
   layoutBackgroundHeaderSpace: true
   groupByYear: true
-tags: []
+weight: 2
 externalUrl: https://0ffsidectf.ddns.net
-draft: false
 ---
 Get ready for **0ffside** **CTF**, a fast-paced, jeopardy-style cybersecurity competition designed to challenge enthusiasts, developers, and security professionals alike.
 

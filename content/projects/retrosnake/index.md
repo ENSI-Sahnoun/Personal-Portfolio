@@ -1,21 +1,22 @@
 ---
 title: RetroSnake
-slug: retrosnake
 date: 2026-05-07T21:58:26.000+01:00
+slug: retrosnake
+draft: false
+featureimage: https://user-images.githubusercontent.com/19374352/77555175-a1c3e400-6ebf-11ea-9da1-c1a2cfd54488.JPG
 media:
   showHero: true
 display:
   showDate: true
   showReadingTime: true
   showWordCount: true
-  showPagination: true
+  showPagination: false
   showAuthor: true
   showHeadingAnchors: true
 layout_opts:
   layoutBackgroundBlur: true
   layoutBackgroundHeaderSpace: true
   groupByYear: true
-draft: false
 ---
 > A retro Snake game written in x86 Assembly for DOS (COM format), designed to run in **DOSBox**.\
 > [Source Code](https://github.com/ENSI-Sahnoun/RetroSnake)

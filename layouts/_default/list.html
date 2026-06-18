@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{ .Scratch.Set "scope" "list" }}
-  {{ $enableToc := .Params.showTableOfContents | default (site.Params.list.showTableOfContents | default false) }}
+  {{ $enableToc := .Params.showTableOfContents | default (.Params.display.showTableOfContents | default (site.Params.list.showTableOfContents | default false)) }}
   {{ $showToc := and $enableToc (in .TableOfContents "<ul") }}
 
   {{ if .Params.showHero | default (site.Params.list.showHero | default false) }}
@@ -14,10 +14,8 @@
     {{ end }}
   {{ end }}
 
+  {{ $showBreadcrumbs := .Params.showBreadcrumbs | default (.Params.display.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false)) }}
   <header>
-    {{ if .Params.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false) }}
-      {{ partial "breadcrumbs.html" . }}
-    {{ end }}
     <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
     <div class="mt-1 mb-2 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
       {{ partial "article-meta/list.html" (dict "context" . "scope" "single") }}
@@ -132,4 +130,11 @@
     </section>
   {{ end }}
   {{ partial "pagination.html" . }}
+  {{/* Related writeups — only on individual writeup section pages (has a parent section) */}}
+  {{ if and (eq .Section "writeups") .Parent.Parent }}
+    {{ partial "writeup-related.html" . }}
+  {{ end }}
+  {{ if $showBreadcrumbs }}
+    {{ partial "breadcrumbs.html" . }}
+  {{ end }}
 {{ end }}
