@@ -101,11 +101,34 @@ http.createServer((req, res) => {
     return;
   }
 
+  if (req.url === "/commit" && req.method === "GET") {
+    console.log("[commit] received commit request");
+    try {
+      execSync("bash scripts/gen-writeup-dates.sh", { cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 10000 });
+      execSync("git add -A && git commit -m 'Update from CMS'", {
+        cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 30000,
+      });
+      console.log("[commit] success");
+      res.end("Committed");
+    } catch (e) {
+      const msg = (e.stderr || e.message || "").toString();
+      if (/nothing to commit|nothing added/i.test(msg)) {
+        console.log("[commit] nothing to commit");
+        res.end("Nothing to commit");
+      } else {
+        console.error("[commit] error:", msg.slice(0, 500));
+        res.statusCode = 500;
+        res.end("Error: Commit failed");
+      }
+    }
+    return;
+  }
+
   if (req.url === "/push" && req.method === "GET") {
     console.log("[push] received push request");
     try {
       execSync("git pull --rebase origin main 2>/dev/null || true", { cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 30000 });
-      execSync("git add -A && git commit -m 'Update from CMS' && git push", {
+      execSync("git push", {
         cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 60000,
       });
       console.log("[push] success");

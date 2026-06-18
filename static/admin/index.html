@@ -14,8 +14,21 @@
     #cms-push-btn:hover { background:#5a6578; }
     #cms-push-btn:disabled { opacity:.6;cursor:not-allowed; }
     #cms-push-btn.pushing { background:#2d3748; }
-    #cms-clean-btn {
+    #cms-push-btn.success { background:#2ecc71; }
+    #cms-push-btn.error { background:#e74c3c; }
+    #cms-commit-btn {
       position:fixed;bottom:70px;right:20px;z-index:9999;
+      padding:10px 20px;background:#2d6a4f;color:#fff;
+      border:none;border-radius:8px;cursor:pointer;font-size:14px;
+      box-shadow:0 2px 8px rgba(0,0,0,.3);
+    }
+    #cms-commit-btn:hover { background:#3d8a6f; }
+    #cms-commit-btn:disabled { opacity:.6;cursor:not-allowed; }
+    #cms-commit-btn.committing { background:#1e4d38; }
+    #cms-commit-btn.success { background:#2ecc71; }
+    #cms-commit-btn.error { background:#e74c3c; }
+    #cms-clean-btn {
+      position:fixed;bottom:120px;right:20px;z-index:9999;
       padding:10px 20px;background:#6c5ce7;color:#fff;
       border:none;border-radius:8px;cursor:pointer;font-size:14px;
       box-shadow:0 2px 8px rgba(0,0,0,.3);
@@ -25,8 +38,6 @@
     #cms-clean-btn.working { background:#5a4bd1; }
     #cms-clean-btn.success { background:#2ecc71; }
     #cms-clean-btn.error { background:#e74c3c; }
-    #cms-push-btn.success { background:#2ecc71; }
-    #cms-push-btn.error { background:#e74c3c; }
 
     #cms-status {
       position:fixed;bottom:20px;left:20px;z-index:9999;
@@ -85,12 +96,14 @@
     <span id="status-git"></span>
   </div>
   <button id="cms-push-btn" onclick="pushToGitHub()">Push to GitHub</button>
+  <button id="cms-commit-btn" onclick="commitChanges()">Commit</button>
   <button id="cms-clean-btn" onclick="scanEmpty()">Clean empty folders</button>
   <div id="cms-overlay-container"></div>
   <script src="https://unpkg.com/decap-cms@3.14.0/dist/decap-cms.js"></script>
   <script>
     var STATUS_URL = "http://localhost:8082/status";
     var PUSH_URL = "http://localhost:8082/push";
+    var COMMIT_URL = "http://localhost:8082/commit";
     var CLEAN_URL = "http://localhost:8082/clean-empty";
 
     function qs(id) { return document.getElementById(id); }
@@ -119,6 +132,28 @@
         dot.className = "dot red";
         git.textContent = "offline";
         git.title = "";
+      });
+    }
+
+    function commitChanges() {
+      var btn = qs("cms-commit-btn");
+      btn.className = "committing";
+      btn.disabled = true;
+      btn.textContent = "Committing...";
+      fetch(COMMIT_URL).then(function(r) {
+        return r.text().then(function(m) {
+          if (r.ok) { return m; }
+          throw new Error(m);
+        });
+      }).then(function(m) {
+        btn.className = "success";
+        btn.textContent = "✓ " + m;
+        refreshStatus();
+        setTimeout(function() { btn.className = ""; btn.textContent = "Commit"; btn.disabled = false; }, 3000);
+      }).catch(function(e) {
+        btn.className = "error";
+        btn.textContent = "✖ " + (e.message || "Failed — server running?");
+        setTimeout(function() { btn.className = ""; btn.textContent = "Commit"; btn.disabled = false; }, 8000);
       });
     }
 
