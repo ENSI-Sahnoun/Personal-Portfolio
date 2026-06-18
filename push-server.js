@@ -1,25 +1,44 @@
 const http = require("http");
 const { execSync } = require("child_process");
 const path = require("path");
+const fs = require("fs");
 
 const repo = path.resolve(process.argv[2] || ".");
 const START_TIME = Date.now();
+const SECRET = process.env.PUSH_SERVER_SECRET;
+
+function checkAuth(req, res) {
+  if (!SECRET) return true; // no secret configured → local dev, allow
+  const auth = req.headers["authorization"] || "";
+  if (auth === "Bearer " + SECRET) return true;
+  res.statusCode = 401;
+  res.end(JSON.stringify({ error: "Unauthorized" }));
+  return false;
+}
+
+function safePath(base, userPath) {
+  const resolved = path.resolve(path.join(base, userPath));
+  if (!resolved.startsWith(path.resolve(base) + path.sep) && resolved !== path.resolve(base)) {
+    return null;
+  }
+  return resolved;
+}
 
 http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (req.method === "OPTIONS") {
     res.end();
     return;
   }
 
+  if (!checkAuth(req, res)) return;
+
   if (req.url === "/clean-empty" && req.method === "GET") {
     console.log("[clean] scanning for empty directories");
     try {
-      const fs = require("fs");
-      const pathModule = require("path");
       const empty = [];
 
       function findEmpty(dir, rel) {
@@ -28,7 +47,7 @@ http.createServer((req, res) => {
         const subdirs = entries.filter(e => e.isDirectory());
         const files = entries.filter(e => !e.isDirectory());
         for (const d of subdirs) {
-          const full = pathModule.join(dir, d.name);
+          const full = path.join(dir, d.name);
           const childRel = rel + "/" + d.name;
           findEmpty(full, childRel);
         }
@@ -37,11 +56,11 @@ http.createServer((req, res) => {
         }
       }
 
-      const contentDir = pathModule.join(repo, "content");
+      const contentDir = path.join(repo, "content");
       const entries = fs.readdirSync(contentDir, { withFileTypes: true });
       for (const e of entries) {
         if (e.isDirectory()) {
-          const full = pathModule.join(contentDir, e.name);
+          const full = path.join(contentDir, e.name);
           findEmpty(full, "content/" + e.name);
         }
       }
@@ -49,8 +68,9 @@ http.createServer((req, res) => {
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ empty: empty }));
     } catch (e) {
+      console.error("[clean] error:", e.message);
       res.statusCode = 500;
-      res.end(JSON.stringify({ error: e.message }));
+      res.end(JSON.stringify({ error: "Internal server error" }));
     }
     return;
   }
@@ -60,18 +80,22 @@ http.createServer((req, res) => {
     req.on("data", c => body.push(c));
     req.on("end", () => {
       try {
-        const fs = require("fs");
         const { paths } = JSON.parse(Buffer.concat(body).toString());
         const removed = [];
         for (const p of paths) {
-          const full = pathModule.join(repo, p);
-          try { fs.rmdirSync(full); removed.push(p); } catch (e) { console.log("[clean] failed to delete", full, e.message); }
+          const full = safePath(repo, p);
+          if (!full) {
+            console.warn("[clean] rejected path traversal attempt:", p);
+            continue;
+          }
+          try { fs.rmdirSync(full); removed.push(p); } catch (e) { console.log("[clean] failed to delete", p, e.message); }
         }
         res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify({ removed: removed.length, paths: removed }));
       } catch (e) {
+        console.error("[clean] post error:", e.message);
         res.statusCode = 500;
-        res.end(JSON.stringify({ error: e.message }));
+        res.end(JSON.stringify({ error: "Internal server error" }));
       }
     });
     return;
@@ -81,7 +105,7 @@ http.createServer((req, res) => {
     console.log("[push] received push request");
     try {
       execSync("git pull --rebase origin main 2>/dev/null || true", { cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 30000 });
-      const out = execSync("git add -A && git commit -m 'Update from CMS' && git push", {
+      execSync("git add -A && git commit -m 'Update from CMS' && git push", {
         cwd: repo, stdio: "pipe", encoding: "utf8", timeout: 60000,
       });
       console.log("[push] success");
@@ -94,11 +118,11 @@ http.createServer((req, res) => {
       } else if (e.code === "ETIMEDOUT" || e.killed) {
         console.log("[push] timed out");
         res.statusCode = 500;
-        res.end("Error: Timed out (60s)");
+        res.end("Error: Timed out");
       } else {
-        console.log("[push] error: " + msg.slice(0, 200));
+        console.error("[push] error:", msg.slice(0, 500));
         res.statusCode = 500;
-        res.end("Error: " + msg.slice(0, 300));
+        res.end("Error: Push failed");
       }
     }
     return;
@@ -109,15 +133,15 @@ http.createServer((req, res) => {
       const out = execSync("git status --porcelain", { cwd: repo, encoding: "utf8", stdio: "pipe" });
       const lines = out.trim().split("\n").filter(Boolean);
       const status = lines.length > 0;
-      const body = JSON.stringify({
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({
         running: true,
         uptime: Math.floor((Date.now() - START_TIME) / 1000),
         dirty: status,
         files: status ? lines.map(l => ({ status: l.slice(0, 2).trim(), path: l.slice(3) })) : [],
-      });
-      res.setHeader("Content-Type", "application/json");
-      res.end(body);
+      }));
     } catch (e) {
+      console.error("[status] error:", e.message);
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ running: true, uptime: 0, dirty: false, files: [] }));
     }

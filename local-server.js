@@ -6,6 +6,23 @@ const crypto = require("crypto");
 const PORT = parseInt(process.env.PORT || "8083", 10);
 const REPO = path.resolve(process.env.GIT_REPO_DIRECTORY || ".");
 const START_TIME = Date.now();
+const SECRET = process.env.LOCAL_SERVER_SECRET;
+
+function checkAuth(req, res) {
+  if (!SECRET) return true;
+  const auth = req.headers["authorization"] || "";
+  if (auth === "Bearer " + SECRET) return true;
+  res.writeHead(401, { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" });
+  res.end(JSON.stringify({ error: "Unauthorized" }));
+  return false;
+}
+
+function safePath(base, userPath) {
+  const resolved = path.resolve(path.join(base, userPath));
+  const resolvedBase = path.resolve(base);
+  if (resolved !== resolvedBase && !resolved.startsWith(resolvedBase + path.sep)) return null;
+  return resolved;
+}
 
 function sha256(buf) {
   return crypto.createHash("sha256").update(buf).digest("hex");
@@ -95,6 +112,8 @@ const server = http.createServer((req, res) => {
 
   if (req.method === "OPTIONS") { res.end(); return; }
 
+  if (!checkAuth(req, res)) return;
+
   if (req.method === "GET" && req.url === "/status") {
     const git = getGitStatus();
     return sendJSON(res, {
@@ -123,7 +142,8 @@ const server = http.createServer((req, res) => {
       try {
         await handleAction(action, params, res);
       } catch (e) {
-        sendError(res, 500, e.message);
+        console.error("[local-server] action error:", e.message);
+        sendError(res, 500, "Internal server error");
       }
     });
     return;
@@ -140,7 +160,8 @@ async function handleAction(action, params, res) {
     }
     case "entriesByFolder": {
       const { folder, extension, depth } = params;
-      const full = path.join(REPO, folder);
+      const full = safePath(REPO, folder);
+      if (!full) return sendError(res, 400, "Invalid path");
       const files = await queryFiles(full, extension, depth || 1);
       const entries = await entriesFromFiles(files.map(f => ({ path: relPath(f) })));
       return sendJSON(res, entries);
@@ -156,13 +177,16 @@ async function handleAction(action, params, res) {
     case "persistEntry": {
       const { entry, dataFiles = [entry], assets = [], options } = params;
       for (const df of dataFiles) {
+        if (!safePath(REPO, df.path)) return sendError(res, 400, "Invalid path");
         await writeFile(path.join(REPO, df.path), df.raw);
       }
       for (const asset of assets) {
+        if (!safePath(REPO, asset.path)) return sendError(res, 400, "Invalid path");
         await writeFile(path.join(REPO, asset.path), Buffer.from(asset.content, asset.encoding || "utf8"));
       }
       if (dataFiles.every(e => e.newPath)) {
         for (const df of dataFiles) {
+          if (!safePath(REPO, df.newPath)) return sendError(res, 400, "Invalid path");
           const oldP = path.join(REPO, df.path);
           const newP = path.join(REPO, df.newPath);
           await fs.promises.rename(oldP, newP).catch(() => {});
@@ -172,8 +196,9 @@ async function handleAction(action, params, res) {
     }
     case "getMedia": {
       const { mediaFolder } = params;
-      const full = path.join(REPO, mediaFolder);
-      const files = await queryFiles(full, "", 1);
+      const full = safePath(REPO, mediaFolder);
+      if (!full) return sendError(res, 400, "Invalid path");
+      const files = await queryFiles(full, null, 1);
       const items = await Promise.all(files.map(f => readMediaFile(relPath(f))));
       return sendJSON(res, items);
     }
@@ -183,16 +208,19 @@ async function handleAction(action, params, res) {
     }
     case "persistMedia": {
       const { asset } = params;
+      if (!safePath(REPO, asset.path)) return sendError(res, 400, "Invalid path");
       await writeFile(path.join(REPO, asset.path), Buffer.from(asset.content, asset.encoding || "utf8"));
       const item = await readMediaFile(asset.path);
       return sendJSON(res, item);
     }
     case "deleteFile": {
+      if (!safePath(REPO, params.path)) return sendError(res, 400, "Invalid path");
       await deleteFile(path.join(REPO, params.path));
       return sendJSON(res, { message: `deleted ${params.path}` });
     }
     case "deleteFiles": {
       for (const p of params.paths) {
+        if (!safePath(REPO, p)) return sendError(res, 400, "Invalid path");
         await deleteFile(path.join(REPO, p));
       }
       return sendJSON(res, { message: `deleted ${params.paths.join(", ")}` });
