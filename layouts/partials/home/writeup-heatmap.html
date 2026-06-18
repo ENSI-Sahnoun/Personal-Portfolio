@@ -26,7 +26,7 @@
 (function () {
   var dates = [
     {{ range $writeupPages }}"{{ .Date.Format "2006-01-02" }}",{{ end }}
-    {{ range ($.Site.Data.writeup_git_dates).dates }}"{{ . }}",{{ end }}
+    {{ range ($.Site.Data.writeupdates).dates }}"{{ . }}",{{ end }}
   ];
 
   function render() {
