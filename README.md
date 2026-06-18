@@ -1,8 +1,19 @@
-# Personal Portfolio
+# sahnoun.dev
 
-Personal portfolio and blog of Youssef Sahnoun — cybersecurity student, CTF player, and developer.
+Personal portfolio and blog of Youssef Sahnoun — cybersecurity student, CTF player, and Design Manager @ OSSEC.
 
 Live at **[sahnoun.dev](https://sahnoun.dev)**
+
+![Home page](screenshots/home.png)
+
+---
+
+## GitHub Stats
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=ENSI-Sahnoun&show_icons=true&theme=dark&hide_border=true&bg_color=0d1117&title_color=e85d5d&icon_color=e85d5d)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ENSI-Sahnoun&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&title_color=e85d5d)
+
+---
 
 ## Stack
 
@@ -16,11 +27,11 @@ Live at **[sahnoun.dev](https://sahnoun.dev)**
 
 ## Content Sections
 
-- **Blog** — posts and writeups
 - **Writeups** — CTF writeups
-- **Achievements** — certifications and milestones
+- **Achievements** — certifications and competition placements
 - **Projects** — personal projects
 - **Resume** — CV page
+- **About** — bio
 
 ## Local Development
 
@@ -31,7 +42,7 @@ npm install
 npm run dev
 ```
 
-This starts three processes concurrently:
+Starts three processes concurrently:
 1. `decap-server` — local CMS backend (no git)
 2. `push-server.js` — git push bridge on `:8082`
 3. `hugo server` — dev server with live reload
