@@ -1,6 +1,6 @@
 ---
 title: Welcome
-date: 2026-06-15T00:00:00.000+01:00
+date: 2026-06-18T00:00:00.000+01:00
 draft: false
 featureimage: https://framerusercontent.com/images/D3YqWlyGjJ7c9bpB1L6YZvy3Zk0.png
 media:
@@ -20,7 +20,7 @@ display:
 https://0ffsidectf.ddns.net/custom/intro/index.html
 {{< /alert >}}
 
-Writeup for "[Welcome](https://0ffsidectf.ddns.net/challenges)"
+Writeup for "[Welcome](https://0ffsidectf.ddns.net/challenges) (Santiago)"
 
 # First Look
 
@@ -28,7 +28,7 @@ This is the first challenge players are greeted with and is usually just a quick
 
 ![](img/2026-06-18-172100_hyprshot.png)
 
-# Flag 
+# Flag
 
 As the answer is obviously `Antony` . We get the flag :\
 `0ffside{4nt0ny_pr1m3_2018}`

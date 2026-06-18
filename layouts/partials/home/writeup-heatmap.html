@@ -1,4 +1,10 @@
-{{ $writeupPages := where .Site.Pages "Section" "writeups" }}
+{{ $allPages := .Site.AllPages }}
+{{ $writeupPages := slice }}
+{{ range $allPages }}
+  {{ if and .File (ge (len (split .File.Path "/")) 4) (strings.HasPrefix .File.Path "writeups/") }}
+    {{ $writeupPages = $writeupPages | append . }}
+  {{ end }}
+{{ end }}
 {{ if $writeupPages }}
 <section class="custom-heatmap-section">
   <h2 class="custom-section-title">Writeup Activity</h2>
@@ -20,6 +26,7 @@
 (function () {
   var dates = [
     {{ range $writeupPages }}"{{ .Date.Format "2006-01-02" }}",{{ end }}
+    {{ range ($.Site.Data.writeup_git_dates).dates }}"{{ . }}",{{ end }}
   ];
 
   function render() {

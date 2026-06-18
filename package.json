@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "bash dev.sh",
-    "build": "hugo",
-    "build-local": "hugo"
+    "build": "bash scripts/gen-writeup-dates.sh && hugo",
+    "build-local": "bash scripts/gen-writeup-dates.sh && hugo"
   },
   "dependencies": {
     "@tinacms/cli": "^2.4.4",

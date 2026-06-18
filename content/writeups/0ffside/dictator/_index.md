@@ -1,6 +1,6 @@
 ---
 title: Dictator
-date: 2026-06-15T14:15:00.000+01:00
+date: 2026-06-13T00:00:00.000+01:00
 display:
   showAuthor: true
   showReadingTime: true
