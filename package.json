@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "bash dev.sh",
-    "build": "bash scripts/gen-writeup-dates.sh && hugo",
+    "build": "[ -z \"$VERCEL\" ] && bash scripts/gen-writeup-dates.sh || true; hugo",
     "build-local": "bash scripts/gen-writeup-dates.sh && hugo"
   },
   "dependencies": {
