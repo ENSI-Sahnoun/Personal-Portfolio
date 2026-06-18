@@ -8,22 +8,20 @@ Live at **[sahnoun.dev](https://sahnoun.dev)**
 
 ---
 
-## GitHub Stats
+## Built With
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=ENSI-Sahnoun&show_icons=true&theme=dark&hide_border=true&bg_color=0d1117&title_color=e85d5d&icon_color=e85d5d)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ENSI-Sahnoun&layout=compact&theme=dark&hide_border=true&bg_color=0d1117&title_color=e85d5d)
-
----
-
-## Stack
-
-| Layer | Tech |
-|---|---|
-| Static site generator | [Hugo](https://gohugo.io) + [Blowfish](https://blowfish.page) theme |
-| CMS | [TinaCMS](https://tina.io) / [Decap CMS](https://decapcms.org) |
-| Hosting | Vercel |
-| Git push bridge | `push-server.js` (port 8082) |
-| Local CMS backend | `local-server.js` (port 8083) |
+![Hugo](https://img.shields.io/badge/Hugo-FF4088?style=for-the-badge&logo=hugo&logoColor=white)
+![Blowfish](https://img.shields.io/badge/Blowfish_Theme-FF4088?style=for-the-badge&logo=hugo&logoColor=white)
+![TinaCMS](https://img.shields.io/badge/TinaCMS-EC4815?style=for-the-badge&logo=tinacms&logoColor=white)
+![Decap CMS](https://img.shields.io/badge/Decap_CMS-FF5E5B?style=for-the-badge&logo=netlify&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![TOML](https://img.shields.io/badge/TOML-9C4121?style=for-the-badge&logo=toml&logoColor=white)
+![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ## Content Sections
 
